@@ -7,7 +7,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        card_view:cardCornerRadius="5dp">
+        card_view:cardCornerRadius="5dp" android:padding="10dp">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -19,20 +19,27 @@
 
         <ImageView
                 android:id="@+id/thumbnail"
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
+                android:layout_width="@dimen/thumbnail_height"
+                android:layout_height="@dimen/thumbnail_height"
                 android:layout_gravity="center"
-                android:src="@android:drawable/ic_menu_share"
-                android:tint="#eeeeee" android:contentDescription="@string/thumbnail_desc"/>
-        <TextView
-                android:id="@+id/title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:textColor="#616161"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:contentDescription="@string/thumbnail_desc"
+                android:padding="@dimen/thumbnail_padding"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/title"
+                    android:padding="@dimen/text_view_padding"
+                    android:textSize="18sp"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/summary"
+                    android:padding="@dimen/text_view_padding"/>
+        </LinearLayout>
 
     </LinearLayout>
 

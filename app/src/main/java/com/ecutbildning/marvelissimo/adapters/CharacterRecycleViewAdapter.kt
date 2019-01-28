@@ -1,13 +1,18 @@
 package com.ecutbildning.marvelissimo.adapters
 
 import android.content.Context
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.dtos.Character
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_layout.view.*
+
+
 
 
 class CharacterRecycleViewAdapter(val context: Context, var characters : List<Character>) : RecyclerView.Adapter<CharacterRecycleViewAdapter.CharacterViewHolder>() {
@@ -20,6 +25,12 @@ class CharacterRecycleViewAdapter(val context: Context, var characters : List<Ch
     override fun onBindViewHolder(holder: CharacterRecycleViewAdapter.CharacterViewHolder, position: Int) {
         val character = characters[position]
         holder.itemView.title.text = character.name
+        holder.itemView.summary.text = character.description
+
+        Picasso.get()
+            .load(character.thumbnail.getUrl())
+            .fit()
+            .into(holder.itemView.thumbnail)
     }
 
     override fun getItemCount(): Int {
