@@ -41,7 +41,7 @@ class SearchActivity : AppCompatActivity() {
     private fun onItemClicked(character: Character){
         val intent = Intent(this, InfoActivity::class.java).apply {
             action = Intent.ACTION_SEND
-            putExtra("CHARACTER_ID", character.id)
+            putExtra("CHARACTER_ID", character.id.toString())
         }
         // Verify that the intent will resolve to an activity
         if (intent.resolveActivity(packageManager) != null) {
