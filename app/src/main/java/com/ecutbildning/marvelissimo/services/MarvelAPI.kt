@@ -1,5 +1,6 @@
 package com.ecutbildning.marvelissimo.services
 
+import android.app.Service
 import com.ecutbildning.marvelissimo.dtos.Response
 import com.ecutbildning.marvelissimo.extensions.md5
 import com.google.gson.GsonBuilder
@@ -13,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface MarvelAPI {
+interface MarvelAPI{
 
     @GET("characters")
     fun getAllCharacters(): Observable<Response>

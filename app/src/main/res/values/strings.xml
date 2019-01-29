@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Marvelissimo</string>
+    <string name="thumbnail_desc">Thumbnail</string>
+    <string name="info_img_desc">Image</string>
 </resources>
