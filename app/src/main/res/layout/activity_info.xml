@@ -24,4 +24,5 @@
             app:layout_constraintVertical_bias="0.0" android:layout_marginTop="20dp"
             android:textSize="@dimen/info_title_size" android:layout_marginStart="177dp"
             android:layout_marginEnd="177dp"/>
+
 </android.support.constraint.ConstraintLayout>
