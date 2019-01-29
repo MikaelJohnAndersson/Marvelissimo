@@ -30,27 +30,8 @@ class InfoActivity : AppCompatActivity() {
             .into(infoImg)
 
 
-      //  val character = response.data.results[0]
-      /*  if(id != null){
-            MarvelAPI.getService().getCharacterById(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { response: Response? ->
-                    if (response != null) {
+      
 
-
-                        val title = findViewById<TextView>(R.id.title)
-                        title.text = character.name
-                        val infoImg = findViewById<ImageView>(R.id.info_img)
-
-                        Picasso.get()
-                            .load(character.thumbnail.getUrl())
-                            .fit()
-                            .into(infoImg)
-
-                    }
-                }
-      */
     }
     }
 
