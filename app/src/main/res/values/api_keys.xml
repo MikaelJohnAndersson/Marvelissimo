@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Marvel_API_Private">4086b80b8666989ae93621b0ef557f24</string>
+    <string name="Marvel_API_Secret">6c386089d3fb48baa459ab9d226b1fe765f26e60</string>
+</resources>

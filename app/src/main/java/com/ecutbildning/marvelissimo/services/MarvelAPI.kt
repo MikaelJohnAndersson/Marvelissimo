@@ -1,6 +1,7 @@
 package com.ecutbildning.marvelissimo.services
 
 import android.app.Service
+import com.ecutbildning.marvelissimo.BuildConfig
 import com.ecutbildning.marvelissimo.dtos.Response
 import com.ecutbildning.marvelissimo.extensions.md5
 import com.google.gson.GsonBuilder
@@ -37,10 +38,13 @@ interface MarvelAPI{
 
                 val ts = (Calendar.getInstance(TimeZone.getTimeZone("UTC")).timeInMillis / 1000L).toString()
 
+                val apiPrivate : String = BuildConfig.Marvel_API_Private
+                val apiSecret : String = BuildConfig.Marvel_API_Secret
+
                 val url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("apikey", "4086b80b8666989ae93621b0ef557f24")
+                    .addQueryParameter("apikey",apiPrivate)
                     .addQueryParameter("ts", ts)
-                    .addQueryParameter("hash", (ts + "6c386089d3fb48baa459ab9d226b1fe765f26e60" + "4086b80b8666989ae93621b0ef557f24").md5())
+                    .addQueryParameter("hash", (ts + apiSecret + apiPrivate).md5())
                     .build()
 
                 chain.proceed(original.newBuilder().url(url).build())
