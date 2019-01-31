@@ -38,8 +38,7 @@ class CharacterRecycleViewAdapter(val context: Context, var characters : List<Ch
     inner class CharacterViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
 
         fun bind(character: Character, clickListener: (Character) -> Unit) {
-            itemView.title.text = character.name
-            itemView.summary.text = character.description
+            itemView.list_item_title.text = character.name
             Picasso.get()
                 .load(character.thumbnail.getUrl())
                 .fit()
