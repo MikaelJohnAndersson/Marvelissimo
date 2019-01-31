@@ -7,7 +7,7 @@ import android.support.v7.widget.GridLayoutManager
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.dtos.Response
 import com.ecutbildning.marvelissimo.services.MarvelAPI
-import android.support.v7.widget.LinearLayoutManager
+
 import com.ecutbildning.marvelissimo.adapters.CharacterRecycleViewAdapter
 import com.ecutbildning.marvelissimo.dtos.Character
 import io.reactivex.schedulers.Schedulers
@@ -42,7 +42,7 @@ class SearchActivity : AppCompatActivity() {
     private fun onItemClicked(character: Character){
         val intent = Intent(this, InfoActivity::class.java).apply {
             action = Intent.ACTION_SEND
-            putExtra("CHARACTER_ID", character.id.toString())
+            putExtra("CHARACTER", character)
         }
         // Verify that the intent will resolve to an activity
         if (intent.resolveActivity(packageManager) != null) {
