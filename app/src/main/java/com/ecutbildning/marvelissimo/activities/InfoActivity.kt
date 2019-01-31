@@ -33,7 +33,9 @@ class InfoActivity : AppCompatActivity() {
       
 
 
+
     }
+    override fun
 
     }
 
