@@ -38,13 +38,13 @@ interface MarvelAPI{
 
                 val ts = (Calendar.getInstance(TimeZone.getTimeZone("UTC")).timeInMillis / 1000L).toString()
 
+                val apiPublic : String = BuildConfig.Marvel_API_Public
                 val apiPrivate : String = BuildConfig.Marvel_API_Private
-                val apiSecret : String = BuildConfig.Marvel_API_Secret
 
                 val url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("apikey",apiPrivate)
+                    .addQueryParameter("apikey",apiPublic)
                     .addQueryParameter("ts", ts)
-                    .addQueryParameter("hash", (ts + apiSecret + apiPrivate).md5())
+                    .addQueryParameter("hash", (ts + apiPrivate + apiPublic).md5())
                     .build()
 
                 chain.proceed(original.newBuilder().url(url).build())
