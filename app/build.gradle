@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+def Marvel_API_Public = '"' + Marvel_API_Public + '"' ?: '"Define Marvel Consumer key"';
+def Marvel_API_Secret = '"' + Marvel_API_Private + '"' ?: '"Define Marvel Consumer secret"';
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -13,6 +16,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        each {type ->
+            type.buildConfigField 'String', 'Marvel_API_Public', Marvel_API_Public
+            type.buildConfigField 'String', 'Marvel_API_Private', Marvel_API_Private
+        }
+
     }
     androidExtensions {
         experimental = true
@@ -21,6 +30,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "Marvel_API_Public", Marvel_API_Public
+            buildConfigField 'String', "Marvel_API_Private", Marvel_API_Private
+            resValue 'string', "Marvel_API_Public", Marvel_API_Public
+            resValue 'string', "Marvel_API_Private", Marvel_API_Private
         }
     }
 }
