@@ -1,7 +1,9 @@
 package com.ecutbildning.marvelissimo.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.ExpandableListView
 import android.widget.ImageView
 import android.widget.TextView
 import com.ecutbildning.marvelissimo.R
@@ -33,9 +35,23 @@ class InfoActivity : AppCompatActivity() {
       
 
 
+                        //Click expansion panel to get info
+                        val infoExpandableListView = findViewById<ExpandableListView>(R.id.expansionLayout)
 
-    }
+                        infoExpandableListView.setOnClickListener { view ->
+                            val intent = Intent(this, ExpansionPanelActivity::class.java)
+                            startActivity(intent)
 
 
-    }
+
+                        }
+
+
+
+                    }
+                }
+
+
+
+
 
