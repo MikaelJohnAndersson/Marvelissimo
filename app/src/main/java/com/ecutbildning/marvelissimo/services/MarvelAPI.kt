@@ -26,6 +26,7 @@ interface MarvelAPI{
     @GET("characters/{id}")
     fun getCharacterById(@Path("id") id: String) : Observable<Response>
 
+
     companion object {
         fun getService(): MarvelAPI {
 
