@@ -4,12 +4,15 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.util.Log
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.dtos.Response
 import com.ecutbildning.marvelissimo.services.MarvelAPI
 
 import com.ecutbildning.marvelissimo.adapters.CharacterRecycleViewAdapter
 import com.ecutbildning.marvelissimo.dtos.Character
+import com.ecutbildning.marvelissimo.dtos.Comic
+import com.ecutbildning.marvelissimo.dtos.ComicResponse
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import kotlinx.android.synthetic.main.activity_search.*
@@ -25,7 +28,7 @@ class SearchActivity : AppCompatActivity() {
         //TODO: Better solution for initializing recyclerView?
         setUpRecycleView(mutableListOf())
 
-        MarvelAPI.getService().getAllCharacters()
+        MarvelAPI.getCharacters().getAllCharacters()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { response: Response? ->
@@ -37,6 +40,18 @@ class SearchActivity : AppCompatActivity() {
                         adapter.notifyDataSetChanged()
                     }
                 }
+        MarvelAPI.getComics().getAllComics()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { response: ComicResponse? ->
+                if (response != null) {
+                    val TAG :String="MainActivity"
+                    val comicsList : List<Comic>? = response.data.results
+                    Log.d(TAG,"Comic list element now ${comicsList?.size}")
+                }
+            }
+
+
     }
 
     private fun onItemClicked(character: Character){

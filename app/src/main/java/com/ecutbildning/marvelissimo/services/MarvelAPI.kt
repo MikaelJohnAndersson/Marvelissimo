@@ -2,6 +2,7 @@ package com.ecutbildning.marvelissimo.services
 
 import android.app.Service
 import com.ecutbildning.marvelissimo.BuildConfig
+import com.ecutbildning.marvelissimo.dtos.ComicResponse
 import com.ecutbildning.marvelissimo.dtos.Response
 import com.ecutbildning.marvelissimo.extensions.md5
 import com.google.gson.GsonBuilder
@@ -26,8 +27,13 @@ interface MarvelAPI{
     @GET("characters/{id}")
     fun getCharacterById(@Path("id") id: String) : Observable<Response>
 
+    @GET("comics")
+    fun getAllComics(): Observable<ComicResponse>
+
     companion object {
-        fun getService(): MarvelAPI {
+        val apiPublic : String = BuildConfig.Marvel_API_Public
+        val apiPrivate : String = BuildConfig.Marvel_API_Private
+        fun getCharacters(): MarvelAPI {
 
             val httpClient = OkHttpClient.Builder()
 
@@ -35,11 +41,36 @@ interface MarvelAPI{
             httpClient.addInterceptor{chain ->
                 val original = chain.request()
                 val originalHttpUrl = original.url()
-
                 val ts = (Calendar.getInstance(TimeZone.getTimeZone("UTC")).timeInMillis / 1000L).toString()
 
-                val apiPublic : String = BuildConfig.Marvel_API_Public
-                val apiPrivate : String = BuildConfig.Marvel_API_Private
+                val url = originalHttpUrl.newBuilder()
+                    .addQueryParameter("apikey",apiPublic)
+                    .addQueryParameter("ts", ts)
+                    .addQueryParameter("hash", (ts + apiPrivate + apiPublic).md5())
+                    .build()
+
+                chain.proceed(original.newBuilder().url(url).build())
+            }
+
+            val gson = GsonBuilder().setLenient().create()
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://gateway.marvel.com/v1/public/")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(httpClient.build())
+                .build()
+
+            return retrofit.create<MarvelAPI>(MarvelAPI::class.java)
+        }
+        fun getComics(): MarvelAPI {
+
+            val httpClient = OkHttpClient.Builder()
+
+            //Adding interceptor to client, appending client credentials and necessary parameters to request
+            httpClient.addInterceptor{chain ->
+                val original = chain.request()
+                val originalHttpUrl = original.url()
+                val ts = (Calendar.getInstance(TimeZone.getTimeZone("UTC")).timeInMillis / 1000L).toString()
 
                 val url = originalHttpUrl.newBuilder()
                     .addQueryParameter("apikey",apiPublic)
