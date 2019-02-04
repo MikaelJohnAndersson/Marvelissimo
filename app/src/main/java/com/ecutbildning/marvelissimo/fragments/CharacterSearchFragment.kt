@@ -43,9 +43,7 @@ class CharacterSearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_character_search, container, false)
-        //Initializing recycleview with empty list
-        //TODO: Better solution for initializing recyclerView?
-        setUpRecycleView(mutableListOf(), rootView)
+        setUpRecycleView(rootView)
         return rootView
     }
 
@@ -55,7 +53,7 @@ class CharacterSearchFragment : Fragment() {
             ?.commit()
     }
 
-    private fun setUpRecycleView(characterList: List<Character>, rootView: View ){
+    private fun setUpRecycleView(rootView: View, characterList: List<Character> = mutableListOf() ){
         val layoutManager = GridLayoutManager(activity, 3)
         val recyclerView = rootView.recyclerView
         recyclerView.layoutManager = layoutManager
