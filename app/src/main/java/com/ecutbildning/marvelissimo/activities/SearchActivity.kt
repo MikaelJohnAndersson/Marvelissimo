@@ -15,14 +15,14 @@ import com.ecutbildning.marvelissimo.dtos.Comic
 import com.ecutbildning.marvelissimo.dtos.ComicResponse
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.fragment_character_search.*
 
-
+//TODO: Convert this class into fragment
 class SearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+        setContentView(R.layout.fragment_character_search)
 
         //Initializing recycleview with empty list
         //TODO: Better solution for initializing recyclerView?
