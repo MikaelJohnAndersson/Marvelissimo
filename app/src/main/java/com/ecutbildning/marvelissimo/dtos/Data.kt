@@ -11,16 +11,6 @@ data class Data(
     val total: Int,
     val count: Int,
     val results: List<Character>
-
-
-
 )
-{
-    @JsonProperty("results")
-      var  comicsResults:List<Comic>?=null
-    @JsonSetter("results")
-    fun setComics(results: List<Comic>){
-        comicsResults=results
-    }
 
-}
+
