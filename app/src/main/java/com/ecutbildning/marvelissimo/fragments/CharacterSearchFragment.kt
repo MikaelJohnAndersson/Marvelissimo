@@ -19,18 +19,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_character_search.*
 import kotlinx.android.synthetic.main.fragment_character_search.view.*
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [CharacterSearchFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [CharacterSearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class CharacterSearchFragment : Fragment() {
-
-    private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,43 +49,10 @@ class CharacterSearchFragment : Fragment() {
         return rootView
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
-
     private fun onItemClicked(character: Character){
-        //TODO: Implement functionality on list click
+         activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.container, CharacterInfoFragment.newInstance(character))
+            ?.commit()
     }
 
     private fun setUpRecycleView(characterList: List<Character>, rootView: View ){
