@@ -5,13 +5,14 @@ import com.ecutbildning.marvelissimo.BuildConfig
 import com.ecutbildning.marvelissimo.dtos.Response
 import com.ecutbildning.marvelissimo.extensions.md5
 import com.google.gson.GsonBuilder
-import retrofit2.http.GET
 import java.util.*
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -28,9 +29,11 @@ interface MarvelAPI{
 
     companion object {
         fun getService(): MarvelAPI {
+            val logger = HttpLoggingInterceptor()
+            logger.level = HttpLoggingInterceptor.Level.BODY
 
             val httpClient = OkHttpClient.Builder()
-
+            httpClient.addInterceptor(logger)
             //Adding interceptor to client, appending client credentials and necessary parameters to request
             httpClient.addInterceptor{chain ->
                 val original = chain.request()
