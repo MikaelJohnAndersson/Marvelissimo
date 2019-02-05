@@ -16,8 +16,8 @@ import com.ecutbildning.marvelissimo.dtos.CharacterDataWrapper
 import com.ecutbildning.marvelissimo.services.MarvelAPI
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_character_search.*
-import kotlinx.android.synthetic.main.fragment_character_search.view.*
+import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_search.view.*
 
 
 private const val LIMIT = 50
@@ -36,7 +36,7 @@ class CharacterSearchFragment : Fragment(), SearchFragment {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_character_search, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_search, container, false)
         setUpRecycleView(rootView)
         return rootView
     }
