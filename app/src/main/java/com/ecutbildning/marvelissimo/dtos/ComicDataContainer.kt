@@ -1,6 +1,6 @@
 package com.ecutbildning.marvelissimo.dtos
 
-data class ComicData (
+data class ComicDataContainer (
     val offset: Int,
     val limit: Int,
     val total: Int,
