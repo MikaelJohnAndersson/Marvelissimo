@@ -29,7 +29,7 @@ interface MarvelAPI{
     fun getCharacterById(@Path("id") id: String) : Observable<Response>
 
     @GET("comics")
-    fun getAllComics(): Observable<ComicResponse>
+    fun getAllComics(@Query("limit") limit : Int, @Query("offset") offset : Int): Observable<ComicResponse>
 
     companion object {
         val apiPublic : String = BuildConfig.Marvel_API_Public
