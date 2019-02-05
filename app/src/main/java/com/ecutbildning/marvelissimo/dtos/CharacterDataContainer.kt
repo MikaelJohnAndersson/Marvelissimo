@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonSetter
 
-data class Data(
+data class CharacterDataContainer(
     val offset: Int,
     val limit: Int,
     val total: Int,

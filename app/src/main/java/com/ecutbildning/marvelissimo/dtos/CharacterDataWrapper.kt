@@ -1,7 +1,7 @@
 package com.ecutbildning.marvelissimo.dtos
 
-data class Response(
+data class CharacterDataWrapper(
     val code: Int,
     val etag: String,
-    val data : Data
+    val data : CharacterDataContainer
 )

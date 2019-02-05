@@ -1,8 +1,6 @@
 package com.ecutbildning.marvelissimo.fragments
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -12,7 +10,7 @@ import android.view.ViewGroup
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.adapters.CharacterRecycleViewAdapter
 import com.ecutbildning.marvelissimo.dtos.Character
-import com.ecutbildning.marvelissimo.dtos.Response
+import com.ecutbildning.marvelissimo.dtos.CharacterDataWrapper
 import com.ecutbildning.marvelissimo.services.MarvelAPI
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -27,9 +25,9 @@ class CharacterSearchFragment : Fragment() {
         MarvelAPI.getService().getAllCharacters()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { response: Response? ->
-                if (response != null) {
-                    val characterList : List<Character> = response.data.results
+            .subscribe { characterDataWrapper: CharacterDataWrapper? ->
+                if (characterDataWrapper != null) {
+                    val characterList : List<Character> = characterDataWrapper.data.results
                     //Getting adapter and setting data source to character list from response
                     val adapter = recyclerView.adapter as CharacterRecycleViewAdapter
                     adapter.characters = characterList
