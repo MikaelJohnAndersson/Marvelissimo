@@ -15,9 +15,12 @@ class MainActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, CharacterSearchFragment.newInstance())
-            .commit()
+        if(savedInstanceState == null) {
+
+            supportFragmentManager.beginTransaction()
+                .add(R.id.container, CharacterSearchFragment.newInstance())
+                .commit()
+        }
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -25,6 +28,7 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_characters -> {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.container, CharacterSearchFragment.newInstance())
+                    .addToBackStack(null)
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
@@ -36,5 +40,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
         false
+    }
+
+    override fun onBackPressed() {
+        if(supportFragmentManager.backStackEntryCount == 0) {
+            super.onBackPressed()
+        }
+        else if (supportFragmentManager.backStackEntryCount == 1){
+            moveTaskToBack(false)
+        }
+        else {
+            fragmentManager.popBackStack()
+        }
     }
 }
