@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.adapters.ComicRecycleViewAdapter
 
@@ -78,6 +79,7 @@ class ComicsSearchFragment : Fragment(), SearchFragment {
                     adapter.comics.addAll(response.data.results)
                     adapter.notifyDataSetChanged()
                     adapter.loading = false
+                    Toast.makeText(activity, "Loading more comics...", Toast.LENGTH_LONG).show()
                 }
             }
         offset += LIMIT
