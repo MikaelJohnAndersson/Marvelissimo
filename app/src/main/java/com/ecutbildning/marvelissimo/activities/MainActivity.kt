@@ -1,5 +1,6 @@
 package com.ecutbildning.marvelissimo.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
@@ -43,14 +44,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(supportFragmentManager.backStackEntryCount == 0) {
+        if (fragmentManager.backStackEntryCount == 0){
             super.onBackPressed()
         }
-        else if (supportFragmentManager.backStackEntryCount == 1){
-            moveTaskToBack(false)
-        }
-        else {
+        else{
             fragmentManager.popBackStack()
         }
+
+
     }
 }

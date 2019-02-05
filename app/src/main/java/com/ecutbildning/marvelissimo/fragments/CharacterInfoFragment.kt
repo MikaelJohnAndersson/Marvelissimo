@@ -82,6 +82,7 @@ class CharacterInfoFragment : Fragment() {
             expandableListView!!.setAdapter(adapter)
         }
         return rootView
+
     }
 
     companion object {
@@ -93,4 +94,5 @@ class CharacterInfoFragment : Fragment() {
                 }
             }
     }
+
 }
