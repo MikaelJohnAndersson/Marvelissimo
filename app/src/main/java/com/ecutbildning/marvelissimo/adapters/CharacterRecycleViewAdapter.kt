@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.list_item_layout.view.*
 
 
 
-class CharacterRecycleViewAdapter(val context: Context, var characters : List<Character>, private val itemClickListener: (Character) -> Unit) : RecyclerView.Adapter<CharacterRecycleViewAdapter.CharacterViewHolder>() {
+class CharacterRecycleViewAdapter(val context: Context, var characters : MutableList<Character>, var loading : Boolean = false, private val itemClickListener: (Character) -> Unit) : RecyclerView.Adapter<CharacterRecycleViewAdapter.CharacterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterRecycleViewAdapter.CharacterViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.list_item_layout, parent, false)
