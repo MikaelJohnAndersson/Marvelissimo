@@ -37,7 +37,7 @@ interface MarvelAPI{
 
         fun getService(): MarvelAPI {
             val logger = HttpLoggingInterceptor()
-            logger.level = HttpLoggingInterceptor.Level.BODY
+            logger.level = HttpLoggingInterceptor.Level.BASIC
 
             val httpClient = OkHttpClient.Builder()
             httpClient.addInterceptor(logger)
