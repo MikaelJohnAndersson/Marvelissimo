@@ -12,7 +12,7 @@ import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.adapters.ExpansionPanelAdapter
 import com.ecutbildning.marvelissimo.dtos.Character
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_character_info.view.*
+import kotlinx.android.synthetic.main.fragment_info.view.*
 
 private const val CHARACTER = "CHARACTER"
 
@@ -64,7 +64,7 @@ class CharacterInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val rootView = inflater.inflate(R.layout.fragment_character_info, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_info, container, false)
 
         val title = rootView.title
         title.text = character?.name
