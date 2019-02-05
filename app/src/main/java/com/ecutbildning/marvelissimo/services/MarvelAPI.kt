@@ -1,9 +1,8 @@
 package com.ecutbildning.marvelissimo.services
 
-import android.app.Service
 import com.ecutbildning.marvelissimo.BuildConfig
-import com.ecutbildning.marvelissimo.dtos.ComicResponse
-import com.ecutbildning.marvelissimo.dtos.Response
+import com.ecutbildning.marvelissimo.dtos.ComicDataWrapper
+import com.ecutbildning.marvelissimo.dtos.CharacterDataWrapper
 import com.ecutbildning.marvelissimo.extensions.md5
 import com.google.gson.GsonBuilder
 import java.util.*
@@ -20,16 +19,16 @@ import retrofit2.http.Query
 interface MarvelAPI{
 
     @GET("characters")
-    fun getAllCharacters(): Observable<Response>
+    fun getAllCharacters(): Observable<CharacterDataWrapper>
 
     @GET("characters")
-    fun getAllCharactersBySearchWord(@Query("nameStartsWith") searchWord : String): Observable<Response>
+    fun getAllCharactersBySearchWord(@Query("nameStartsWith") searchWord : String): Observable<CharacterDataWrapper>
 
     @GET("characters/{id}")
-    fun getCharacterById(@Path("id") id: String) : Observable<Response>
+    fun getCharacterById(@Path("id") id: String) : Observable<CharacterDataWrapper>
 
     @GET("comics")
-    fun getAllComics(): Observable<ComicResponse>
+    fun getAllComics(): Observable<ComicDataWrapper>
 
     companion object {
         val apiPublic : String = BuildConfig.Marvel_API_Public
