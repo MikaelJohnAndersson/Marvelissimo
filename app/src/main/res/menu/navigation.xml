@@ -3,13 +3,6 @@
       tools:context=".MainActivity">
 
     <item
-            android:id="@+id/navigation_search"
-            android:icon="@android:drawable/ic_menu_search"
-            android:title="@string/title_search"
-            app:showAsAction="always|collapseActionView"/>
-    <!--app:actionViewrClass="android.support.v7.widget.SearchView"/>-->
-
-    <item
             android:id="@+id/navigation_characters"
             android:icon="@drawable/icons8_anonymous_mask_50"
             android:title="@string/title_characters"/>
