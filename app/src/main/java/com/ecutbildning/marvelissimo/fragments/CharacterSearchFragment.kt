@@ -22,15 +22,13 @@ import kotlinx.android.synthetic.main.fragment_character_search.view.*
 private const val LIMIT = 50
 private const val GRID_SPAN_COUNT = 3
 
-class CharacterSearchFragment : Fragment() {
+class CharacterSearchFragment : Fragment(), SearchFragment {
 
     private var offset = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        loadMoreCharacters()
-
+        loadMoreData()
     }
 
     override fun onCreateView(
@@ -62,9 +60,9 @@ class CharacterSearchFragment : Fragment() {
                     val visibleItemCount = layoutManager.childCount
                     val totalItemCount = layoutManager.itemCount
                     val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
-                    //Start loading more characters at span count * {ROW} from bottom
-                    if (((pastVisibleItems + visibleItemCount) + (GRID_SPAN_COUNT * 4) >= totalItemCount) && !adapter.loading) {
-                        loadMoreCharacters()
+                    //Start loading more characters if scroll is at bottom
+                    if (((pastVisibleItems + visibleItemCount) >= totalItemCount) && !adapter.loading) {
+                        loadMoreData()
                         adapter.loading = true
                     }
                 }
@@ -72,7 +70,7 @@ class CharacterSearchFragment : Fragment() {
         }
     }
 
-    private fun loadMoreCharacters(){
+    override fun loadMoreData() {
         MarvelAPI.getService().getAllCharacters(LIMIT, offset)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -1,6 +1,7 @@
 package com.ecutbildning.marvelissimo.fragments
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -13,6 +14,7 @@ import com.ecutbildning.marvelissimo.adapters.ComicRecycleViewAdapter
 
 import com.ecutbildning.marvelissimo.dtos.Comic
 import com.ecutbildning.marvelissimo.dtos.ComicResponse
+import com.ecutbildning.marvelissimo.dtos.Response
 
 import com.ecutbildning.marvelissimo.services.MarvelAPI
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,24 +22,19 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_character_search.*
 import kotlinx.android.synthetic.main.fragment_character_search.view.*
 
-class ComicsSearchFragment : Fragment() {
+private const val LIMIT = 50
+private const val GRID_SPAN_COUNT = 3
+
+class ComicsSearchFragment : Fragment(), SearchFragment {
+
+    private var offset = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        MarvelAPI.getComics().getAllComics()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { response: ComicResponse? ->
-                if (response != null) {
-                    val comicList : List<Comic> = response.data.results
-                    //Getting adapter and setting data source to character list from response
-                    val adapter = recyclerView.adapter as ComicRecycleViewAdapter
-                    adapter.comics = comicList
-                    adapter.notifyDataSetChanged()
-                }
-            }
+        loadMoreData()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,12 +43,44 @@ class ComicsSearchFragment : Fragment() {
         setUpRecycleView(rootView)
         return rootView
     }
-    private fun setUpRecycleView(rootView: View, comicList: List<Comic> = mutableListOf() ){
-        val layoutManager = GridLayoutManager(activity, 3)
+
+    private fun setUpRecycleView(rootView: View, comicList: MutableList<Comic> = mutableListOf() ){
+        val layoutManager = GridLayoutManager(activity, GRID_SPAN_COUNT)
         val recyclerView = rootView.recyclerView
         recyclerView.layoutManager = layoutManager
         val adapter = ComicRecycleViewAdapter(activity as Context, comicList) { comic -> onItemClicked(comic)}
         recyclerView.adapter = adapter
+
+        //TODO: Implement solution for earlier versions, or change min SDK
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            recyclerView.setOnScrollChangeListener { _, _, _, _, _ ->
+                run {
+                    val visibleItemCount = layoutManager.childCount
+                    val totalItemCount = layoutManager.itemCount
+                    val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
+                    //Start loading more characters if scroll is at bottom
+                    if (((pastVisibleItems + visibleItemCount) >= totalItemCount) && !adapter.loading) {
+                        loadMoreData()
+                        adapter.loading = true
+                    }
+                }
+            }
+        }
+    }
+
+    override fun loadMoreData() {
+        MarvelAPI.getComics().getAllComics(LIMIT, offset)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { response: ComicResponse? ->
+                if (response != null) {
+                    val adapter = recyclerView.adapter as ComicRecycleViewAdapter
+                    adapter.comics.addAll(response.data.results)
+                    adapter.notifyDataSetChanged()
+                    adapter.loading = false
+                }
+            }
+        offset += LIMIT
     }
 
     private fun onItemClicked(comic: Comic){

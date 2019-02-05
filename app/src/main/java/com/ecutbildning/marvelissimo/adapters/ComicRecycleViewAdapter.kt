@@ -10,7 +10,7 @@ import com.ecutbildning.marvelissimo.dtos.Comic
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_layout.view.*
 
-class ComicRecycleViewAdapter (val context: Context, var comics : List<Comic>, private val itemClickListener: (Comic) -> Unit) : RecyclerView.Adapter<ComicRecycleViewAdapter.ComicViewHolder>() {
+class ComicRecycleViewAdapter (val context: Context, var comics : MutableList<Comic>, var loading : Boolean = false, private val itemClickListener: (Comic) -> Unit) : RecyclerView.Adapter<ComicRecycleViewAdapter.ComicViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicRecycleViewAdapter.ComicViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.list_item_layout, parent, false)
         return ComicViewHolder(view)
