@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.adapters.CharacterRecycleViewAdapter
 import com.ecutbildning.marvelissimo.dtos.Character
@@ -65,6 +66,7 @@ class CharacterSearchFragment : Fragment(), SearchFragment {
                     if (((pastVisibleItems + visibleItemCount) >= totalItemCount) && !adapter.loading) {
                         loadMoreData()
                         adapter.loading = true
+                        Toast.makeText(activity, "Loading more characters...", Toast.LENGTH_LONG).show()
                     }
                 }
             }
