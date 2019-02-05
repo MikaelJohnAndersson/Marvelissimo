@@ -19,7 +19,7 @@ import retrofit2.http.Query
 interface MarvelAPI{
 
     @GET("characters")
-    fun getAllCharacters(): Observable<CharacterDataWrapper>
+    fun getAllCharacters(@Query("limit") limit : Int, @Query("offset") offset : Int): Observable<Response>
 
     @GET("characters")
     fun getAllCharactersBySearchWord(@Query("nameStartsWith") searchWord : String): Observable<CharacterDataWrapper>
