@@ -1,17 +1,11 @@
 package com.ecutbildning.marvelissimo.adapters
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import com.ecutbildning.marvelissimo.R
-import com.ecutbildning.marvelissimo.activities.InfoActivity
 import com.ecutbildning.marvelissimo.dtos.Character
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_layout.view.*

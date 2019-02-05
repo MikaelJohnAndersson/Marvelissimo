@@ -2,4 +2,8 @@
     <string name="app_name">Marvelissimo</string>
     <string name="thumbnail_desc">Thumbnail</string>
     <string name="info_img_desc">Image</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_characters">Characters</string>
+    <string name="title_comics">Comics</string>
+    <string name="title_favourites">Favourites</string>
 </resources>
