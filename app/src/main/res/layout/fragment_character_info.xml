@@ -13,7 +13,7 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="142dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/title" android:layout_marginBottom="20dp"
-            android:layout_marginTop="50dp" android:contentDescription="@string/info_img_desc"/>
+            android:layout_marginTop="96dp" android:contentDescription="@string/info_img_desc"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
