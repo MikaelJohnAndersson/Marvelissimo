@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <!-- Primary colors -->
+    <color name="colorHeroLight">#3269BD</color>
+    <color name="colorHero">#1A287A</color>
+    <color name="colorHeroDark">#121A50</color>
+
+    <!-- Secondary colors -->
+    <color name="colorVillainLight">#982929</color>
+    <color name="colorVillain">#6B1B1B</color>
+    <color name="colorVillainDark">#440808</color>
+
+    <!-- Accent colors -->
+    <color name="colorAccentLight">#FDCE41</color>
+    <color name="colorAccentMellow">#BD681F</color>
+    <color name="colorAccentDark">#0B4017</color>
+
+    <!-- Light to dark colors -->
+    <color name="colorLightest">#EEEEEE</color>
+    <color name="colorLighter">#D2D2D2</color>
+    <color name="colorLight">#B6B6B6</color>
+    <color name="colorDark">#868F95</color>
+    <color name="colorDarker">#484A59</color>
+    <color name="colorDarkest">#1D1D1F</color>
+
+
 </resources>
