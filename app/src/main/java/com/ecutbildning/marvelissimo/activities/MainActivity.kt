@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         val mTopToolbar = findViewById<Toolbar>(R.id.top_toolbar)
         setSupportActionBar(mTopToolbar)
+
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
