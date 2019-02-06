@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 
 
-private const val LIMIT = 50
+private const val LIMIT = 20
 private const val GRID_SPAN_COUNT = 3
 
 class CharacterSearchFragment : Fragment(), SearchFragment {
