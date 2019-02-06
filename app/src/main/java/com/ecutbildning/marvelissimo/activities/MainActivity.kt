@@ -50,7 +50,5 @@ class MainActivity : AppCompatActivity() {
         else{
             fragmentManager.popBackStack()
         }
-
-
     }
 }

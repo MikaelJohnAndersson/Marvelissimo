@@ -36,7 +36,6 @@ class CharacterSearchFragment : Fragment() {
                     adapter.notifyDataSetChanged()
                 }
             }
-
     }
 
     override fun onCreateView(
@@ -46,10 +45,7 @@ class CharacterSearchFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_character_search, container, false)
         setUpRecycleView(rootView)
         return rootView
-
-
     }
-
     private fun onItemClicked(character: Character){
          activity?.supportFragmentManager?.beginTransaction()
             ?.add(R.id.container, CharacterInfoFragment.newInstance(character))
