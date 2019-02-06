@@ -21,7 +21,7 @@ class ComicInfoFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var comic: Comic? = null
 
-    private var expandableListView: ExpandableListView? = null
+   /* private var expandableListView: ExpandableListView? = null
     private var adapter: ExpandableListAdapter? = null
     private var titleList: List<String>? = null
 
@@ -51,7 +51,7 @@ class ComicInfoFragment : Fragment() {
             listData["Series"] = series
 
             return listData
-        }
+        }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,13 +75,13 @@ class ComicInfoFragment : Fragment() {
             .fit()
             .into(infoImg)
 
-        expandableListView = rootView.expandableListView
+       /* expandableListView = rootView.expandableListView
         if (expandableListView != null) {
             val listData = data
             titleList = ArrayList(listData.keys)
             adapter = ExpansionPanelAdapter(activity as Context, titleList as ArrayList<String>, listData)
             expandableListView!!.setAdapter(adapter)
-        }
+        }*/
         return rootView
     }
 

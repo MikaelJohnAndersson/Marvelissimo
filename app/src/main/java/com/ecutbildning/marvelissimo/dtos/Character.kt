@@ -11,5 +11,6 @@ data class Character  (
     val thumbnail: Thumbnail,
     val comics : ContentInfoList,
     val series : ContentInfoList,
+    val events : ContentInfoList,
     val stories : ContentInfoList
 ): Parcelable
