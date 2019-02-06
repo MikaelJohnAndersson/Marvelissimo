@@ -8,8 +8,8 @@ data class Comic (
     val id: Int,
     val name: String,
     val description: String,
-    val  digitalId :Int,
-    val   pageCount :Int,
+    val digitalId :Int,
+    val pageCount :Int,
     val thumbnail: Thumbnail
 
 ) : Parcelable
