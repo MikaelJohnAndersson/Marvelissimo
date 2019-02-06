@@ -88,7 +88,7 @@ class ComicInfoFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(comic: Comic) =
-            CharacterInfoFragment().apply {
+            ComicInfoFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(COMIC, comic)
                 }
