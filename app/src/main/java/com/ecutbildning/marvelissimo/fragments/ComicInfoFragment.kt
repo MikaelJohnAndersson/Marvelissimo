@@ -52,7 +52,7 @@ class ComicInfoFragment : InfoFragment() {
             .fit()
             .into(infoImg)
 
-        if(!comic.description.isEmpty()){
+        if(!comic.description.isNullOrEmpty()){
             val description = rootView?.description
             description?.text = comic.description
         }
