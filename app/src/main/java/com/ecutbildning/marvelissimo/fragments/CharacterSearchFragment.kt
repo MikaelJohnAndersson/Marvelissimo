@@ -76,7 +76,7 @@ class CharacterSearchFragment : Fragment(), SearchFragment {
         MarvelAPI.getService().getAllCharacters(LIMIT, offset)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { response: Response? ->
+            .subscribe { response: CharacterDataWrapper? ->
                 if (response != null) {
                     val adapter = recyclerView.adapter as CharacterRecycleViewAdapter
                     adapter.characters.addAll(response.data.results)

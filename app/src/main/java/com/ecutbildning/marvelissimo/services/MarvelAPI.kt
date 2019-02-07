@@ -19,7 +19,7 @@ import retrofit2.http.Query
 interface MarvelAPI{
 
     @GET("characters")
-    fun getAllCharacters(@Query("limit") limit : Int, @Query("offset") offset : Int): Observable<Response>
+    fun getAllCharacters(@Query("limit") limit : Int, @Query("offset") offset : Int): Observable<CharacterDataWrapper>
 
     @GET("characters")
     fun getAllCharactersBySearchWord(@Query("nameStartsWith") searchWord : String): Observable<CharacterDataWrapper>
@@ -28,7 +28,7 @@ interface MarvelAPI{
     fun getCharacterById(@Path("id") id: String) : Observable<CharacterDataWrapper>
 
     @GET("comics")
-    fun getAllComics(@Query("limit") limit : Int, @Query("offset") offset : Int): Observable<ComicResponse>
+    fun getAllComics(@Query("limit") limit : Int, @Query("offset") offset : Int): Observable<ComicDataWrapper>
 
     companion object {
         val apiPublic : String = BuildConfig.Marvel_API_Public
