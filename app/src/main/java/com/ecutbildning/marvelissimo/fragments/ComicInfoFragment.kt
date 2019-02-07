@@ -21,7 +21,7 @@ class ComicInfoFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var comic: Comic? = null
 
-   /* private var expandableListView: ExpandableListView? = null
+    private var expandableListView: ExpandableListView? = null
     private var adapter: ExpandableListAdapter? = null
     private var titleList: List<String>? = null
 
@@ -29,29 +29,13 @@ class ComicInfoFragment : Fragment() {
         get() {
             val listData = HashMap<String, List<String>>()
 
-            val description = ArrayList<String>()
-            description.add("Whatever description")
-
-            val comics = ArrayList<String>()
-            comics.add("whatever comic")
-
-            val stories = ArrayList<String>()
-            stories.add("whatever stories")
-
-            val events = ArrayList<String>()
-            events.add("whatever events")
-
-            val series = ArrayList<String>()
-            series.add("Whatever serie")
-
-            listData["Description"] = description
-            listData["Comics"] = comics
-            listData["Stories"] = stories
-            listData["Events"] = events
-            listData["Series"] = series
+            listData["Characters"] = ArrayList()
+            listData["Creators"] = ArrayList()
+            listData["Stories"] = ArrayList()
+            listData["Events"] = ArrayList()
 
             return listData
-        }*/
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,15 +57,40 @@ class ComicInfoFragment : Fragment() {
         Picasso.get()
             .load(comic?.thumbnail?.getUrl())
             .fit()
-            .into(infoImg)
+            .into(infoImg);
 
-       /* expandableListView = rootView.expandableListView
+       expandableListView = rootView.expandableListView
+        val listData = data
         if (expandableListView != null) {
-            val listData = data
             titleList = ArrayList(listData.keys)
             adapter = ExpansionPanelAdapter(activity as Context, titleList as ArrayList<String>, listData)
             expandableListView!!.setAdapter(adapter)
-        }*/
+        }
+
+        if(!comic?.description.isNullOrEmpty()){
+            val description = rootView.description
+            description.text = comic?.description
+        }
+        if(!comic?.characters?.items.isNullOrEmpty()){
+            val characterInfo = comic?.characters?.items?.joinToString("\n") { it.name }
+            val characterData = listData["Characters"] as ArrayList<String>
+            characterData.add(characterInfo!!)
+        }
+        if (!comic?.creators?.items.isNullOrEmpty()){
+            val creatorsInfo = comic?.creators?.items?.joinToString("\n") { it.name }
+            val creatorsData = listData["Creators"] as ArrayList<String>
+            creatorsData.add(creatorsInfo!!)
+        }
+        if(!comic?.stories?.items.isNullOrEmpty()){
+            val storiesInfo = comic?.stories?.items?.joinToString("\n") { it.name }
+            val storiesData = listData["Stories"] as ArrayList<String>
+            storiesData.add(storiesInfo!!)
+        }
+        if(!comic?.events?.items.isNullOrEmpty()){
+            val eventInfo = comic?.events?.items?.joinToString("\n") { it.name }
+            val eventData = listData["Events"] as ArrayList<String>
+            eventData.add(eventInfo!!)
+        }
         return rootView
     }
 

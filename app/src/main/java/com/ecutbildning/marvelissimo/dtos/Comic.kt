@@ -10,6 +10,9 @@ data class Comic (
     val description: String,
     val digitalId :Int,
     val pageCount :Int,
-    val thumbnail: Thumbnail
-
+    val thumbnail: Thumbnail,
+    var creators: ContentInfoList,
+    var characters: ContentInfoList,
+    var stories : ContentInfoList,
+    var events : ContentInfoList
 ) : Parcelable
