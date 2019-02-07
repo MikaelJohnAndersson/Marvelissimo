@@ -27,7 +27,7 @@ class ComicRecycleViewAdapter (val context: Context, var comics : MutableList<Co
     inner class ComicViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
 
         fun bind(comic: Comic, clickListener: (Comic) -> Unit) {
-            itemView.list_item_title.text = comic.name
+            itemView.list_item_title.text = comic.title
             Picasso.get()
                 .load(comic.thumbnail.getUrl())
                 .fit()

@@ -52,7 +52,7 @@ class ComicInfoFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_info, container, false)
 
         val title = rootView.title
-        title.text = comic?.name
+        title.text = comic?.title
         val infoImg = rootView.info_img
         Picasso.get()
             .load(comic?.thumbnail?.getUrl())
