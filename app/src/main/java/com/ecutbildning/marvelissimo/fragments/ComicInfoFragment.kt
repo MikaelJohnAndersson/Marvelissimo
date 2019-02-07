@@ -12,6 +12,7 @@ import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.adapters.ExpansionPanelAdapter
 
 import com.ecutbildning.marvelissimo.dtos.Comic
+import com.ecutbildning.marvelissimo.dtos.Thumbnail
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_info.view.*
 
@@ -47,7 +48,7 @@ class ComicInfoFragment : InfoFragment() {
 
         val infoImg = rootView?.info_img
         Picasso.get()
-            .load(comic.thumbnail.getUrl())
+            .load(comic.thumbnail.getUrl(Thumbnail.LANDSCAPE_MEDIUM))
             .fit()
             .into(infoImg)
 

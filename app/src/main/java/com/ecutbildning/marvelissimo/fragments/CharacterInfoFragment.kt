@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ecutbildning.marvelissimo.dtos.Character
+import com.ecutbildning.marvelissimo.dtos.Thumbnail
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_info.view.*
 
@@ -40,7 +41,7 @@ class CharacterInfoFragment : InfoFragment() {
 
         val infoImg = rootView?.info_img
         Picasso.get()
-            .load(character.thumbnail.getUrl())
+            .load(character.thumbnail.getUrl(Thumbnail.LANDSCAPE_MEDIUM))
             .fit()
             .into(infoImg)
 
