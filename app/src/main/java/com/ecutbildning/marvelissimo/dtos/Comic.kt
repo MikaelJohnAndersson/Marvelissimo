@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Comic (
     val id: Int,
-    val name: String,
+    val title: String,
     val description: String,
     val digitalId :Int,
     val pageCount :Int,
