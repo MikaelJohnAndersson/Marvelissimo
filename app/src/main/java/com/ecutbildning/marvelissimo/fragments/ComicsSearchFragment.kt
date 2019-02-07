@@ -83,6 +83,7 @@ class ComicsSearchFragment : Fragment(), SearchFragment {
     private fun onItemClicked(comic: Comic){
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.container, ComicInfoFragment.newInstance(comic))
+            ?.addToBackStack(null)
             ?.commit()
     }
 
