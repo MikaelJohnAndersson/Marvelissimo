@@ -34,50 +34,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/description"
                     android:padding="@dimen/text_view_padding" android:text="@string/no_description_found"/>
-            <TextView
-                    android:text="@string/comics"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:padding="@dimen/text_view_padding"
-                    android:textSize="@dimen/info_content_title_size"/>
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/comics"
-                    android:padding="@dimen/text_view_padding" android:text="@string/no_comics_found"/>
-            <TextView
-                    android:text="@string/stories"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:padding="@dimen/text_view_padding"
-                    android:textSize="@dimen/info_content_title_size"/>
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/stories"
-                    android:padding="@dimen/text_view_padding" android:text="@string/no_stories_found"/>
-            <TextView
-                    android:text="@string/events"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:padding="@dimen/text_view_padding"
-                    android:textSize="@dimen/info_content_title_size"/>
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/events"
-                    android:padding="@dimen/text_view_padding" android:text="@string/no_events_found"/>
-            <TextView
-                    android:text="@string/series"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:padding="@dimen/text_view_padding"
-                    android:textSize="@dimen/info_content_title_size"/>
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/series"
-                    android:padding="@dimen/text_view_padding" android:text="@string/no_series_found"/>
 
             <ExpandableListView
                     android:id="@+id/expandableListView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:dividerHeight="0.5dp">
-
             </ExpandableListView>
+
         </LinearLayout>
 
     </LinearLayout>
