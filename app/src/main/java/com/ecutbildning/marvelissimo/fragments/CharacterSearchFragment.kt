@@ -1,14 +1,12 @@
 package com.ecutbildning.marvelissimo.fragments
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.adapters.CharacterRecycleViewAdapter
 import com.ecutbildning.marvelissimo.dtos.Character
@@ -23,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_search.view.*
 private const val LIMIT = 20
 private const val GRID_SPAN_COUNT = 3
 
-class CharacterSearchFragment : Fragment(), SearchFragment {
+class CharacterSearchFragment : Fragment(), ISearchFragment {
 
     private var offset = 0
 
