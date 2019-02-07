@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "799698643340",
+    "firebase_url": "https://marvelissimo-966b8.firebaseio.com",
+    "project_id": "marvelissimo-966b8",
+    "storage_bucket": "marvelissimo-966b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799698643340:android:1721b4f19780eb57",
+        "android_client_info": {
+          "package_name": "com.ecutbildning.marvelissimo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799698643340-d4fd431o59k57hqlfi6dt11iohfj2a2u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ecutbildning.marvelissimo",
+            "certificate_hash": "c6a5f19b7ef57f86f58385bccee4842fb020714f"
+          }
+        },
+        {
+          "client_id": "799698643340-rq2j3qogff3tkr21e0ld31aus5aiepkg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsBvjMEV_4hrYnM7nmeW9jd7J7iMuKX2E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799698643340-rq2j3qogff3tkr21e0ld31aus5aiepkg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
