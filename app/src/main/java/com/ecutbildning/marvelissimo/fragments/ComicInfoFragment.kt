@@ -12,20 +12,16 @@ import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.adapters.ExpansionPanelAdapter
 
 import com.ecutbildning.marvelissimo.dtos.Comic
+import com.ecutbildning.marvelissimo.dtos.Thumbnail
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_info.view.*
 
-private const val COMIC = "COMIC"
+class ComicInfoFragment : InfoFragment() {
 
-class ComicInfoFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var comic: Comic? = null
+    override val INFO_OBJECT: String
+        get() = "COMIC"
 
-    private var expandableListView: ExpandableListView? = null
-    private var adapter: ExpandableListAdapter? = null
-    private var titleList: List<String>? = null
-
-    private val data: HashMap<String, List<String>>
+    override val data: HashMap<String, List<String>>
         get() {
             val listData = HashMap<String, List<String>>()
 
@@ -37,59 +33,48 @@ class ComicInfoFragment : Fragment() {
             return listData
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            comic = it.getParcelable(COMIC)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val rootView = inflater.inflate(R.layout.fragment_info, container, false)
+        val rootView = super.onCreateView(inflater, container, savedInstanceState)
 
-        val title = rootView.title
-        title.text = comic?.title
-        val infoImg = rootView.info_img
-        Picasso.get()
-            .load(comic?.thumbnail?.getUrl())
-            .fit()
-            .into(infoImg);
-
-       expandableListView = rootView.expandableListView
         val listData = data
-        if (expandableListView != null) {
-            titleList = ArrayList(listData.keys)
-            adapter = ExpansionPanelAdapter(activity as Context, titleList as ArrayList<String>, listData)
-            expandableListView!!.setAdapter(adapter)
-        }
+        val comic = infoObject as Comic
 
-        if(!comic?.description.isNullOrEmpty()){
-            val description = rootView.description
-            description.text = comic?.description
+        val title = rootView?.title
+        title?.text = comic.title
+
+        val infoImg = rootView?.info_img
+        Picasso.get()
+            .load(comic.thumbnail.getUrl(Thumbnail.LANDSCAPE_MEDIUM))
+            .fit()
+            .into(infoImg)
+
+        if(!comic.description.isEmpty()){
+            val description = rootView?.description
+            description?.text = comic.description
         }
-        if(!comic?.characters?.items.isNullOrEmpty()){
-            val characterInfo = comic?.characters?.items?.joinToString("\n") { it.name }
+        if(!comic.characters.items.isNullOrEmpty()){
+            val characterInfo = comic.characters.items.joinToString("\n") { it.name }
             val characterData = listData["Characters"] as ArrayList<String>
-            characterData.add(characterInfo!!)
+            characterData.add(characterInfo)
         }
-        if (!comic?.creators?.items.isNullOrEmpty()){
-            val creatorsInfo = comic?.creators?.items?.joinToString("\n") { it.name }
+        if (!comic.creators.items.isNullOrEmpty()){
+            val creatorsInfo = comic.creators.items.joinToString("\n") { it.name }
             val creatorsData = listData["Creators"] as ArrayList<String>
-            creatorsData.add(creatorsInfo!!)
+            creatorsData.add(creatorsInfo)
         }
-        if(!comic?.stories?.items.isNullOrEmpty()){
-            val storiesInfo = comic?.stories?.items?.joinToString("\n") { it.name }
+        if(!comic.stories.items.isNullOrEmpty()){
+            val storiesInfo = comic.stories.items.joinToString("\n") { it.name }
             val storiesData = listData["Stories"] as ArrayList<String>
-            storiesData.add(storiesInfo!!)
+            storiesData.add(storiesInfo)
         }
-        if(!comic?.events?.items.isNullOrEmpty()){
-            val eventInfo = comic?.events?.items?.joinToString("\n") { it.name }
+        if(!comic.events.items.isNullOrEmpty()){
+            val eventInfo = comic.events.items.joinToString("\n") { it.name }
             val eventData = listData["Events"] as ArrayList<String>
-            eventData.add(eventInfo!!)
+            eventData.add(eventInfo)
         }
         return rootView
     }
@@ -99,7 +84,7 @@ class ComicInfoFragment : Fragment() {
         fun newInstance(comic: Comic) =
             ComicInfoFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable(COMIC, comic)
+                    putParcelable(INFO_OBJECT, comic)
                 }
             }
     }

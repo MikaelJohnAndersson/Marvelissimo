@@ -1,6 +1,6 @@
 package com.ecutbildning.marvelissimo.fragments
 
-interface SearchFragment {
+interface ISearchFragment {
   fun loadMoreData()
   fun makeSearch(search : String?)
 }

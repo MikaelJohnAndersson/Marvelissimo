@@ -1,6 +1,5 @@
 package com.ecutbildning.marvelissimo.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
@@ -10,9 +9,8 @@ import com.ecutbildning.marvelissimo.fragments.CharacterSearchFragment
 import com.ecutbildning.marvelissimo.fragments.ComicsSearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import android.support.v7.widget.Toolbar
-import android.support.v4.view.MenuItemCompat.getActionView
 import android.support.v7.widget.SearchView
-import com.ecutbildning.marvelissimo.fragments.SearchFragment
+import com.ecutbildning.marvelissimo.fragments.ISearchFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         val searchView = searchItem.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                val activeFragment = supportFragmentManager.findFragmentByTag("ACTIVE_FRAGMENT") as SearchFragment
+                val activeFragment = supportFragmentManager.findFragmentByTag("ACTIVE_FRAGMENT") as ISearchFragment
                 activeFragment.makeSearch(query)
                 return true
             }

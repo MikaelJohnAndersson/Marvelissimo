@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.dtos.Character
+import com.ecutbildning.marvelissimo.dtos.Thumbnail
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_layout.view.*
 
@@ -34,7 +35,7 @@ class CharacterRecycleViewAdapter(val context: Context, var characters : Mutable
         fun bind(character: Character, clickListener: (Character) -> Unit) {
             itemView.list_item_title.text = character.name
             Picasso.get()
-                .load(character.thumbnail.getUrl())
+                .load(character.thumbnail.getUrl(Thumbnail.PORTRAIT_MEDIUM))
                 .fit()
                 .into(itemView.thumbnail)
             itemView.setOnClickListener { clickListener(character)}
