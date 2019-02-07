@@ -17,7 +17,7 @@
                 android:layout_height="@dimen/info_img_height" tools:srcCompat="@tools:sample/avatars"
                 android:id="@+id/info_img"
                 android:contentDescription="@string/info_img_desc"
-                android:adjustViewBounds="false" android:cropToPadding="false"/>
+                android:adjustViewBounds="false" android:cropToPadding="false" android:layout_marginTop="66dp"/>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
