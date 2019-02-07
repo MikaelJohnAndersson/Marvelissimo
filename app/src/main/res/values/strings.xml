@@ -10,4 +10,12 @@
     <string name="title_favourites">Favourites</string>
 
     <string name="no_description_found">No description found</string>
+
+
+    <string name="hintLogInEmail">Email</string>
+    <string name="hintLoginPassword">Password</string>
+    <string name="logInButton">Login</string>
+    <string name="loginRegisterButton">Register</string>
+
+
 </resources>
