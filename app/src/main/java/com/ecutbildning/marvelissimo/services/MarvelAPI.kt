@@ -22,13 +22,13 @@ interface MarvelAPI{
     fun getAllCharacters(@Query("limit") limit : Int, @Query("offset") offset : Int): Observable<CharacterDataWrapper>
 
     @GET("characters")
-    fun getAllCharactersBySearchWord(@Query("nameStartsWith") searchWord : String): Observable<CharacterDataWrapper>
-
-    @GET("characters/{id}")
-    fun getCharacterById(@Path("id") id: String) : Observable<CharacterDataWrapper>
+    fun getAllCharactersBySearchWord(@Query("nameStartsWith") searchWord : String?, @Query("limit") limit : Int, @Query("offset") offset : Int): Observable<CharacterDataWrapper>
 
     @GET("comics")
     fun getAllComics(@Query("limit") limit : Int, @Query("offset") offset : Int): Observable<ComicDataWrapper>
+
+    @GET("comics")
+    fun getAllComicsBySearchWord(@Query("titleStartsWith") searchWord : String?, @Query("limit") limit : Int, @Query("offset") offset : Int): Observable<ComicDataWrapper>
 
     companion object {
         val apiPublic : String = BuildConfig.Marvel_API_Public

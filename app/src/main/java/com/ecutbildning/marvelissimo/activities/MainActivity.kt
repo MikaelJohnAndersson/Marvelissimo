@@ -10,6 +10,10 @@ import com.ecutbildning.marvelissimo.fragments.CharacterSearchFragment
 import com.ecutbildning.marvelissimo.fragments.ComicsSearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import android.support.v7.widget.Toolbar
+import android.support.v4.view.MenuItemCompat.getActionView
+import android.support.v7.widget.SearchView
+import com.ecutbildning.marvelissimo.fragments.SearchFragment
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,13 +31,28 @@ class MainActivity : AppCompatActivity() {
         if(savedInstanceState == null) {
 
             supportFragmentManager.beginTransaction()
-                .add(R.id.container, CharacterSearchFragment.newInstance())
+                .add(R.id.container, CharacterSearchFragment.newInstance(), "ACTIVE_FRAGMENT")
+                .addToBackStack("ACTIVE_FRAGMENT")
                 .commit()
         }
     }
 
     override fun onCreateOptionsMenu(menu:Menu):Boolean {
         menuInflater.inflate(R.menu.top_navigation, menu)
+        val searchItem = menu.findItem(R.id.navigation_search)
+        val searchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val activeFragment = supportFragmentManager.findFragmentByTag("ACTIVE_FRAGMENT") as SearchFragment
+                activeFragment.makeSearch(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                //Implement autocomplete
+                return false
+            }
+        })
         return true
     }
 
@@ -41,15 +60,15 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.navigation_characters -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, CharacterSearchFragment.newInstance())
-                    .addToBackStack(null)
+                    .replace(R.id.container, CharacterSearchFragment.newInstance(), "ACTIVE_FRAGMENT")
+                    .addToBackStack("ACTIVE_FRAGMENT")
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_comics -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, ComicsSearchFragment.newInstance())
-                    .addToBackStack(null)
+                    .replace(R.id.container, ComicsSearchFragment.newInstance(), "ACTIVE_FRAGMENT")
+                    .addToBackStack("ACTIVE_FRAGMENT")
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
