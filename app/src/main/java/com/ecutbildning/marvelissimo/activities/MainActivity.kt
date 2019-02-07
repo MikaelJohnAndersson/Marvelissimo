@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_comics -> {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.container, ComicsSearchFragment.newInstance())
+                    .addToBackStack(null)
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
