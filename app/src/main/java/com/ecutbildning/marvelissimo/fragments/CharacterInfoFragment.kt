@@ -58,7 +58,6 @@ class CharacterInfoFragment : Fragment() {
             character = it.getParcelable(CHARACTER)
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -83,7 +82,6 @@ class CharacterInfoFragment : Fragment() {
         }
         return rootView
     }
-
     companion object {
         @JvmStatic
         fun newInstance(character: Character) =

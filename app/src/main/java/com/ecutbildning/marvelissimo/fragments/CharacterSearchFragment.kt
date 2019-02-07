@@ -44,10 +44,10 @@ class CharacterSearchFragment : Fragment() {
         setUpRecycleView(rootView)
         return rootView
     }
-
     private fun onItemClicked(character: Character){
          activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.container, CharacterInfoFragment.newInstance(character))
+            ?.add(R.id.container, CharacterInfoFragment.newInstance(character))
+             ?.addToBackStack(null)
             ?.commit()
     }
 

@@ -1,5 +1,6 @@
 package com.ecutbildning.marvelissimo.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
@@ -22,9 +23,12 @@ class MainActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, CharacterSearchFragment.newInstance())
-            .commit()
+        if(savedInstanceState == null) {
+
+            supportFragmentManager.beginTransaction()
+                .add(R.id.container, CharacterSearchFragment.newInstance())
+                .commit()
+        }
     }
 
     override fun onCreateOptionsMenu(menu:Menu):Boolean {
@@ -37,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_characters -> {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.container, CharacterSearchFragment.newInstance())
+                    .addToBackStack(null)
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
@@ -48,5 +53,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
         false
+    }
+
+    override fun onBackPressed() {
+        if (fragmentManager.backStackEntryCount == 0){
+            super.onBackPressed()
+        }
+        else{
+            fragmentManager.popBackStack()
+        }
     }
 }
