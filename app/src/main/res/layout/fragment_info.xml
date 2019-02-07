@@ -70,14 +70,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/series"
                     android:padding="@dimen/text_view_padding" android:text="@string/no_series_found"/>
-        </LinearLayout>
-        <!--    <LinearLayout
->>>>>>> populating CharacterInfoFrag with data. Layout changes in fragment_info
-                android:layout_width="match_parent"
-                android:layout_height="603dp"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/info_container"
-        >
 
             <ExpandableListView
                     android:id="@+id/expandableListView"
@@ -86,9 +78,7 @@
                     android:dividerHeight="0.5dp">
 
             </ExpandableListView>
-
-        </LinearLayout>-->
-
+        </LinearLayout>
 
     </LinearLayout>
 
