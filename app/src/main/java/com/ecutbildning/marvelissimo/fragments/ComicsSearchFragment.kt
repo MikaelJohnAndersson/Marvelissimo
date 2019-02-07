@@ -10,20 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.ecutbildning.marvelissimo.R
-import com.ecutbildning.marvelissimo.adapters.CharacterRecycleViewAdapter
-import com.ecutbildning.marvelissimo.dtos.Character
-import com.ecutbildning.marvelissimo.dtos.CharacterDataWrapper
+import com.ecutbildning.marvelissimo.adapters.ComicRecycleViewAdapter
+import com.ecutbildning.marvelissimo.dtos.Comic
+import com.ecutbildning.marvelissimo.dtos.ComicDataWrapper
 import com.ecutbildning.marvelissimo.services.MarvelAPI
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 
-
 private const val LIMIT = 20
 private const val GRID_SPAN_COUNT = 3
 
-class CharacterSearchFragment : Fragment(), SearchFragment {
+class ComicsSearchFragment : Fragment(), SearchFragment {
 
     private var offset = 0
 
@@ -40,18 +39,12 @@ class CharacterSearchFragment : Fragment(), SearchFragment {
         setUpRecycleView(rootView)
         return rootView
     }
-    private fun onItemClicked(character: Character){
-         activity?.supportFragmentManager?.beginTransaction()
-            ?.add(R.id.container, CharacterInfoFragment.newInstance(character))
-             ?.addToBackStack(null)
-            ?.commit()
-    }
 
-    private fun setUpRecycleView(rootView: View, characterList: MutableList<Character> = mutableListOf() ){
+    private fun setUpRecycleView(rootView: View, comicList: MutableList<Comic> = mutableListOf() ){
         val layoutManager = GridLayoutManager(activity, GRID_SPAN_COUNT)
         val recyclerView = rootView.recyclerView
         recyclerView.layoutManager = layoutManager
-        val adapter = CharacterRecycleViewAdapter(activity as Context, characterList) { character -> onItemClicked(character)}
+        val adapter = ComicRecycleViewAdapter(activity as Context, comicList) { comic -> onItemClicked(comic)}
         recyclerView.adapter = adapter
 
         //TODO: Implement solution for earlier versions, or change min SDK
@@ -65,7 +58,6 @@ class CharacterSearchFragment : Fragment(), SearchFragment {
                     if (((pastVisibleItems + visibleItemCount) >= totalItemCount) && !adapter.loading) {
                         loadMoreData()
                         adapter.loading = true
-                        Toast.makeText(activity, "Loading more characters...", Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -73,22 +65,31 @@ class CharacterSearchFragment : Fragment(), SearchFragment {
     }
 
     override fun loadMoreData() {
-        MarvelAPI.getService().getAllCharacters(LIMIT, offset)
+        MarvelAPI.getComics().getAllComics(LIMIT, offset)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { response: CharacterDataWrapper? ->
+            .subscribe { response: ComicDataWrapper? ->
                 if (response != null) {
-                    val adapter = recyclerView.adapter as CharacterRecycleViewAdapter
-                    adapter.characters.addAll(response.data.results)
+                    val adapter = recyclerView.adapter as ComicRecycleViewAdapter
+                    adapter.comics.addAll(response.data.results)
                     adapter.notifyDataSetChanged()
                     adapter.loading = false
+                    Toast.makeText(activity, "Loading more comics...", Toast.LENGTH_LONG).show()
                 }
             }
         offset += LIMIT
     }
 
+    private fun onItemClicked(comic: Comic){
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.container, ComicInfoFragment.newInstance(comic))
+            ?.commit()
+    }
+
     companion object {
         @JvmStatic
-        fun newInstance() = CharacterSearchFragment()
+        fun newInstance() = ComicsSearchFragment()
     }
+
+
 }

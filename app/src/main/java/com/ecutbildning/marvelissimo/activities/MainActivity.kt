@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.fragments.CharacterSearchFragment
+import com.ecutbildning.marvelissimo.fragments.ComicsSearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import android.support.v7.widget.Toolbar
 
@@ -46,6 +47,9 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_comics -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, ComicsSearchFragment.newInstance())
+                    .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_favourites -> {

@@ -12,7 +12,7 @@ import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.adapters.ExpansionPanelAdapter
 import com.ecutbildning.marvelissimo.dtos.Character
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_character_info.view.*
+import kotlinx.android.synthetic.main.fragment_info.view.*
 
 private const val CHARACTER = "CHARACTER"
 
@@ -28,26 +28,10 @@ class CharacterInfoFragment : Fragment() {
         get() {
             val listData = HashMap<String, List<String>>()
 
-            val description = ArrayList<String>()
-            description.add("Whatever description")
-
-            val comics = ArrayList<String>()
-            comics.add("whatever comic")
-
-            val stories = ArrayList<String>()
-            stories.add("whatever stories")
-
-            val events = ArrayList<String>()
-            events.add("whatever events")
-
-            val series = ArrayList<String>()
-            series.add("Whatever serie")
-
-            listData["Description"] = description
-            listData["Comics"] = comics
-            listData["Stories"] = stories
-            listData["Events"] = events
-            listData["Series"] = series
+            listData["Comics"] = ArrayList()
+            listData["Stories"] = ArrayList()
+            listData["Events"] = ArrayList()
+            listData["Series"] = ArrayList()
 
             return listData
         }
@@ -63,7 +47,7 @@ class CharacterInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val rootView = inflater.inflate(R.layout.fragment_character_info, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_info, container, false)
 
         val title = rootView.title
         title.text = character?.name
@@ -74,12 +58,45 @@ class CharacterInfoFragment : Fragment() {
             .into(infoImg)
 
         expandableListView = rootView.expandableListView
+        val listData = data
         if (expandableListView != null) {
-            val listData = data
-            titleList = ArrayList(listData.keys)
-            adapter = ExpansionPanelAdapter(activity as Context, titleList as ArrayList<String>, listData)
-            expandableListView!!.setAdapter(adapter)
+           titleList = ArrayList(listData.keys)
+           adapter = ExpansionPanelAdapter(activity as Context, titleList as ArrayList<String>, listData)
+           expandableListView!!.setAdapter(adapter)
         }
+
+            if(!character?.description.isNullOrEmpty()){
+                val description = rootView.description
+                description.text = character?.description
+            }
+            if (!character?.comics?.items.isNullOrEmpty()){
+                val comicinfo = character?.comics?.items?.joinToString("\n") { it.name }
+                val comicData = listData["Comics"] as ArrayList<String>
+                comicData.add(comicinfo!!)
+             /* val comics = rootView.comics
+                comics.text = comicinfo*/
+            }
+            if(!character?.stories?.items.isNullOrEmpty()){
+                val storiesinfo = character?.stories?.items?.joinToString("\n") { it.name }
+                val storiesData = listData["Stories"] as ArrayList<String>
+                storiesData.add(storiesinfo!!)
+               /* val stories = rootView.stories
+                stories.text = storiesinfo*/
+            }
+            if(!character?.events?.items.isNullOrEmpty()){
+                val eventinfo = character?.events?.items?.joinToString("\n") { it.name }
+                val eventData = listData["Events"] as ArrayList<String>
+                eventData.add(eventinfo!!)
+                /*val events = rootView.events
+                events.text = eventinfo*/
+            }
+            if(!character?.series?.items.isNullOrEmpty()){
+                val seriesinfo = character?.series?.items?.joinToString("\n") { it.name }
+                val seriesData = listData["Series"] as ArrayList<String>
+                seriesData.add(seriesinfo!!)
+               /* val series = rootView.series
+                series.text = seriesinfo*/
+            }
         return rootView
     }
     companion object {
