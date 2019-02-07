@@ -47,6 +47,20 @@ class CharacterSearchFragment : Fragment(), SearchFragment {
             ?.commit()
     }
 
+    override fun makeSearch(search: String?) {
+        MarvelAPI.getService().getAllCharactersBySearchWord(search, LIMIT, offset)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { response: CharacterDataWrapper? ->
+                if (response != null) {
+                    val adapter = recyclerView.adapter as CharacterRecycleViewAdapter
+                    adapter.characters.clear()
+                    adapter.characters.addAll(response.data.results)
+                    adapter.notifyDataSetChanged()
+                }
+            }
+    }
+
     private fun setUpRecycleView(rootView: View, characterList: MutableList<Character> = mutableListOf() ){
         val layoutManager = GridLayoutManager(activity, GRID_SPAN_COUNT)
         val recyclerView = rootView.recyclerView
@@ -54,7 +68,7 @@ class CharacterSearchFragment : Fragment(), SearchFragment {
         val adapter = CharacterRecycleViewAdapter(activity as Context, characterList) { character -> onItemClicked(character)}
         recyclerView.adapter = adapter
 
-        //TODO: Implement solution for earlier versions, or change min SDK
+        /*//TODO: Implement solution for earlier versions, or change min SDK
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             recyclerView.setOnScrollChangeListener { _, _, _, _, _ ->
                 run {
@@ -69,7 +83,7 @@ class CharacterSearchFragment : Fragment(), SearchFragment {
                     }
                 }
             }
-        }
+        }*/
     }
 
     override fun loadMoreData() {
@@ -81,10 +95,8 @@ class CharacterSearchFragment : Fragment(), SearchFragment {
                     val adapter = recyclerView.adapter as CharacterRecycleViewAdapter
                     adapter.characters.addAll(response.data.results)
                     adapter.notifyDataSetChanged()
-                    adapter.loading = false
                 }
             }
-        offset += LIMIT
     }
 
     companion object {

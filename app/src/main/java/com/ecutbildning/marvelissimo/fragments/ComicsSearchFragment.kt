@@ -40,6 +40,20 @@ class ComicsSearchFragment : Fragment(), SearchFragment {
         return rootView
     }
 
+    override fun makeSearch(search: String?) {
+        MarvelAPI.getService().getAllComicsBySearchWord(search, LIMIT, offset)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { response: ComicDataWrapper? ->
+                if (response != null) {
+                    val adapter = recyclerView.adapter as ComicRecycleViewAdapter
+                    adapter.comics.clear()
+                    adapter.comics.addAll(response.data.results)
+                    adapter.notifyDataSetChanged()
+                }
+            }
+    }
+
     private fun setUpRecycleView(rootView: View, comicList: MutableList<Comic> = mutableListOf() ){
         val layoutManager = GridLayoutManager(activity, GRID_SPAN_COUNT)
         val recyclerView = rootView.recyclerView
@@ -47,7 +61,7 @@ class ComicsSearchFragment : Fragment(), SearchFragment {
         val adapter = ComicRecycleViewAdapter(activity as Context, comicList) { comic -> onItemClicked(comic)}
         recyclerView.adapter = adapter
 
-        //TODO: Implement solution for earlier versions, or change min SDK
+        /*//TODO: Implement solution for earlier versions, or change min SDK
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             recyclerView.setOnScrollChangeListener { _, _, _, _, _ ->
                 run {
@@ -61,7 +75,7 @@ class ComicsSearchFragment : Fragment(), SearchFragment {
                     }
                 }
             }
-        }
+        }*/
     }
 
     override fun loadMoreData() {
@@ -73,11 +87,8 @@ class ComicsSearchFragment : Fragment(), SearchFragment {
                     val adapter = recyclerView.adapter as ComicRecycleViewAdapter
                     adapter.comics.addAll(response.data.results)
                     adapter.notifyDataSetChanged()
-                    adapter.loading = false
-                    Toast.makeText(activity, "Loading more comics...", Toast.LENGTH_LONG).show()
                 }
             }
-        offset += LIMIT
     }
 
     private fun onItemClicked(comic: Comic){
