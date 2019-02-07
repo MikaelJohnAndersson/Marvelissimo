@@ -9,7 +9,6 @@ data class Thumbnail(
     val extension: String
 ) : Parcelable {
     fun getUrl(size : String): String {
-        println("$path/$size.$extension")
         return "$path/$size.$extension"
     }
     companion object {
