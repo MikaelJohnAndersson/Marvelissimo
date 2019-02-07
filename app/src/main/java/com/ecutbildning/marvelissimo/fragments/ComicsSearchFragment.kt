@@ -11,11 +11,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.adapters.ComicRecycleViewAdapter
-
-
 import com.ecutbildning.marvelissimo.dtos.Comic
-import com.ecutbildning.marvelissimo.dtos.ComicResponse
-
+import com.ecutbildning.marvelissimo.dtos.ComicDataWrapper
 import com.ecutbildning.marvelissimo.services.MarvelAPI
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -31,7 +28,6 @@ class ComicsSearchFragment : Fragment(), SearchFragment {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         loadMoreData()
     }
 
@@ -72,7 +68,7 @@ class ComicsSearchFragment : Fragment(), SearchFragment {
         MarvelAPI.getComics().getAllComics(LIMIT, offset)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { response: ComicResponse? ->
+            .subscribe { response: ComicDataWrapper? ->
                 if (response != null) {
                     val adapter = recyclerView.adapter as ComicRecycleViewAdapter
                     adapter.comics.addAll(response.data.results)
