@@ -18,4 +18,8 @@
     <string name="loginRegisterButton">Register</string>
 
 
+    <string name="signin_wrong_credentials">Enter valid email and password</string>
+    <string name="signin_failed_missing_fields">Sign in failed, not all fields are set</string>
+
+
 </resources>
