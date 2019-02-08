@@ -7,8 +7,9 @@ import android.view.View
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.services.FireBaseAuth
 import com.ecutbildning.marvelissimo.utilities.SnackbarManager
+import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var view: View
     private lateinit var snackbarManager: SnackbarManager
@@ -22,6 +23,12 @@ class RegisterActivity : AppCompatActivity() {
             FireBaseAuth.createUser(email, password, firstName, lastName, this, view)
         } else {
             snackbarManager.createSnackbar(view, resources.getString(R.string.registration_failed_fields_missing), Color.RED)
+        }
+    }
+    override fun onClick(v: View) {
+        val i = v.id
+        when (i) {
+            R.id.register_button -> createAccount(register_email.text.toString(), register_password.text.toString(), register_firstName.text.toString(), register_lastName.text.toString())
         }
     }
 

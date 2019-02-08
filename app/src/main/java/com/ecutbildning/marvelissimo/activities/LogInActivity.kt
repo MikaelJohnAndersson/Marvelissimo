@@ -18,7 +18,7 @@ class LogInActivity : AppCompatActivity() , View.OnClickListener {
         setContentView(R.layout.activity_login)
         view = findViewById(android.R.id.content)
         snackbarManager = SnackbarManager()
-        login_login_button.setOnClickListener(this)
+        btnLogIn.setOnClickListener(this)
         login_register_button.setOnClickListener(this)
     }
 
@@ -39,7 +39,7 @@ class LogInActivity : AppCompatActivity() , View.OnClickListener {
                 val intent = Intent(this@LogInActivity, RegisterActivity::class.java)
                 startActivity(intent)
             }
-            R.id.btnLogIn -> signIn(login_email.text.toString(), login_password.text.toString())
+            R.id.login_register_button -> signIn(login_email.text.toString(), login_password.text.toString())
         }
     }
 }
