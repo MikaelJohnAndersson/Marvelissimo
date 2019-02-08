@@ -3,9 +3,7 @@ package com.ecutbildning.marvelissimo.fragments
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
 import com.ecutbildning.marvelissimo.R
@@ -28,6 +26,7 @@ abstract class InfoFragment : Fragment() {
         arguments?.let {
             infoObject = it.getParcelable(INFO_OBJECT)
         }
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -45,7 +44,14 @@ abstract class InfoFragment : Fragment() {
             expandableListView!!.setAdapter(adapter)
         }
 
+
         return rootView
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        menu?.clear()
+        inflater?.inflate(R.menu.info_top_navigation, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
 }
