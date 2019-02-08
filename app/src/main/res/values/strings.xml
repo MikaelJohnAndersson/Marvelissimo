@@ -16,12 +16,10 @@
 
     <string name="no_description_found">No description found</string>
 
-
     <string name="hintLogInEmail">Email</string>
     <string name="hintLoginPassword">Password</string>
     <string name="logInButton">Login</string>
     <string name="loginRegisterButton">Register</string>
-
 
     <string name="register_first_name">First Name</string>
     <string name="register_last_name">Last Name</string>
