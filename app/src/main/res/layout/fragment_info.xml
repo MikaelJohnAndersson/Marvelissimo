@@ -9,7 +9,8 @@
                   xmlns:app="http://schemas.android.com/apk/res-auto"
                   xmlns:tools="http://schemas.android.com/tools"
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content" android:orientation="vertical"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
                   android:background="@color/cardview_light_background">
 
         <ImageView
@@ -17,7 +18,8 @@
                 android:layout_height="@dimen/info_img_height" tools:srcCompat="@tools:sample/avatars"
                 android:id="@+id/info_img"
                 android:contentDescription="@string/info_img_desc"
-                android:adjustViewBounds="false" android:cropToPadding="false" android:layout_marginTop="66dp"/>
+                android:adjustViewBounds="false" android:cropToPadding="false"
+                android:layout_marginTop="66dp"/>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
