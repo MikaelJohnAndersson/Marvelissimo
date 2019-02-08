@@ -35,11 +35,11 @@ class LogInActivity : AppCompatActivity() , View.OnClickListener {
     override fun onClick(v: View) {
         val i = v.id
         when (i) {
-            R.id.btnLogIn -> {
+            R.id.login_register_button -> {
                 val intent = Intent(this@LogInActivity, RegisterActivity::class.java)
                 startActivity(intent)
             }
-            R.id.login_register_button -> signIn(login_email.text.toString(), login_password.text.toString())
+            R.id.btnLogIn -> signIn(login_email.text.toString(), login_password.text.toString())
         }
     }
 }

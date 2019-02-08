@@ -17,6 +17,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        register_button.setOnClickListener(this)
     }
     private fun createAccount(email: String, password: String, firstName: String, lastName: String) {
         if (email.isNotBlank() && password.isNotBlank() && firstName.isNotBlank() && lastName.isNotBlank()) {
