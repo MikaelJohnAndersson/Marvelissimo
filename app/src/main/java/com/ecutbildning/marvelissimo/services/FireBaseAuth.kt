@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.view.View
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.activities.MainActivity
+import com.ecutbildning.marvelissimo.dtos.User
 import com.ecutbildning.marvelissimo.utilities.SnackbarManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -20,6 +21,11 @@ object FireBaseAuth {
     private var snackBarManager: SnackbarManager = SnackbarManager()
     private var database: DatabaseReference = FirebaseDatabase.getInstance().reference
     private lateinit var userDataRef: DatabaseReference
+
+    fun toggleOnline(status: Boolean) {
+        if (user != null)
+            userDataRef.child("online").setValue(status)
+    }
 
     fun signIn(email: String, password: String, context: Context, view: View) {
         auth.signInWithEmailAndPassword(email, password)
@@ -36,5 +42,34 @@ object FireBaseAuth {
                 }
 
             }
+    }
+
+
+    fun createUser(email: String, password: String, firstName: String, lastName: String, context: Context, view: View) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task: Task<AuthResult> ->
+                if (task.isSuccessful) {
+                    user = auth.currentUser
+                    userDataRef = database.child("users").child(user!!.uid)
+                    writeNewUser(firstName, lastName, user?.email!!, user?.uid!!)
+                    val intent = Intent(context, MainActivity::class.java)
+                    context.startActivity(intent)
+                } else {
+                    snackBarManager.createSnackbar(view, context.getString(R.string.registration_failed), Color.RED)
+                }
+            }
+    }
+    private fun writeNewUser(firstName: String, lastName: String, email: String, uid: String) {
+        val newUser = User(email, firstName, lastName)
+        userDataRef.setValue(newUser)
+        toggleOnline(true)
+    }
+
+    fun addFavorite(itemId: String) {
+        userDataRef.child("favoriteCharacters/$itemId").setValue(true)
+    }
+
+    fun deleteFavorite(itemId: String) {
+        userDataRef.child("favoriteCharacters/$itemId").removeValue()
     }
 }
