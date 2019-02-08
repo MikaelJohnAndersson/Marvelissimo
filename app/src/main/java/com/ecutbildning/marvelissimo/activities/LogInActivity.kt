@@ -18,6 +18,8 @@ class LogInActivity : AppCompatActivity() , View.OnClickListener {
         setContentView(R.layout.activity_log_in)
         view = findViewById(android.R.id.content)
         snackbarManager = SnackbarManager()
+        login_login_button.setOnClickListener(this)
+        login_register_button.setOnClickListener(this)
     }
 
 
