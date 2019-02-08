@@ -63,7 +63,6 @@
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
 
     <TextView
-            android:text="@string/register_signup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/login_register_button"
             tools:text="Not a member? Sign up now." app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +70,8 @@
             android:layout_marginStart="115dp" android:layout_marginTop="41dp"
             app:layout_constraintTop_toBottomOf="@+id/btnLogIn" android:layout_marginBottom="150dp"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintVertical_bias="1.0" android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+            app:layout_constraintVertical_bias="1.0" android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:text="@string/register_signup_button"/>
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" app:srcCompat="@drawable/user_48"

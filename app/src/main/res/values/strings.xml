@@ -28,6 +28,7 @@
     <string name="register_email">Email</string>
     <string name="register_password">Password</string>
     <string name="register_signup_button">Not a member? Sign up now.</string>
+    <string name="register_signup_confirm">Sign up now.</string>
 
     <string name="signin_wrong_credentials">Enter valid email and password</string>
     <string name="signin_failed_missing_fields">Sign in failed, not all fields are set</string>
