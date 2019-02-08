@@ -8,14 +8,14 @@ import android.view.View
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.services.FireBaseAuth
 import com.ecutbildning.marvelissimo.utilities.SnackbarManager
-import kotlinx.android.synthetic.main.activity_log_in.*
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LogInActivity : AppCompatActivity() , View.OnClickListener {
     private lateinit var view: View
     private lateinit var snackbarManager: SnackbarManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_log_in)
+        setContentView(R.layout.activity_login)
         view = findViewById(android.R.id.content)
         snackbarManager = SnackbarManager()
         login_login_button.setOnClickListener(this)
