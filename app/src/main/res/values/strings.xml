@@ -10,4 +10,26 @@
     <string name="title_favourites">Favourites</string>
 
     <string name="no_description_found">No description found</string>
+
+
+    <string name="login_logo">LoginLogo</string>
+    <string name="user_login_icon">User</string>
+    <string name="password_login_icon">Password</string>
+    <string name="email_field">EmailField</string>
+    <string name="password_field">PasswordField</string>
+
+
+    <string name="hintLogInEmail">Email</string>
+    <string name="hintLoginPassword">Password</string>
+    <string name="logInButton">Login</string>
+    <string name="loginRegisterButton">Register</string>
+
+    <string name="register_first_name">First Name</string>
+    <string name="register_last_name">Last Name</string>
+    <string name="register_email">Email</string>
+    <string name="register_password">Password</string>
+    <string name="register_signup_button">Not a member? Sign up now.</string>
+    <string name="register_signup_confirm">Sign up now.</string>
+    <string name="signin_failed_missing_fields">Sign in failed, not all fields are set</string>
+
 </resources>
