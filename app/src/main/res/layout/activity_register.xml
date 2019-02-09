@@ -7,4 +7,79 @@
         android:layout_height="match_parent"
         tools:context=".activities.RegisterActivity">
 
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/marvel_logo_300x300"
+            android:id="@+id/login_logo" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="30dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="55dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="55dp"
+            android:layout_marginBottom="14dp" app:layout_constraintBottom_toTopOf="@+id/login_email"
+            android:contentDescription="@string/login_logo"/>
+    <EditText
+            android:id="@+id/register_firstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:autofillHints="password"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/register_lastName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.516"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" android:layout_marginBottom="16dp"
+            android:hint="@string/register_first_name"/>
+
+    <EditText
+            android:id="@+id/register_lastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/register_last_name"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/register_email"
+            app:layout_constraintEnd_toEndOf="@+id/register_firstName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/register_firstName" android:layout_marginBottom="16dp"/>
+
+    <EditText
+            android:id="@+id/register_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/register_email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toTopOf="@+id/register_password"
+            app:layout_constraintEnd_toEndOf="@+id/register_lastName"
+            app:layout_constraintStart_toStartOf="@+id/register_lastName" app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginBottom="16dp"/>
+
+    <EditText
+            android:id="@+id/register_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:ems="10"
+            android:hint="@string/register_password"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toTopOf="@+id/register_button"
+            app:layout_constraintEnd_toEndOf="@+id/register_email"
+            app:layout_constraintStart_toStartOf="@+id/register_email" app:layout_constraintHorizontal_bias="0.0"/>
+
+    <Button
+            android:id="@+id/register_button"
+            android:layout_width="214dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/register_signup_confirm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/register_password"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/register_password"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.928"/>
 </android.support.constraint.ConstraintLayout>
