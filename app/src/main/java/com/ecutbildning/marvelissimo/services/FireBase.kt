@@ -22,10 +22,9 @@ object FireBase {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task: Task<AuthResult> ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
+
                     user = auth.currentUser
-                    //   userDataRef = database.child("users").child(user!!.uid)
-                    //updateUI(user)
+
                     val intent = Intent(context, MainActivity::class.java)
                     context.startActivity(intent)
                 } else {
