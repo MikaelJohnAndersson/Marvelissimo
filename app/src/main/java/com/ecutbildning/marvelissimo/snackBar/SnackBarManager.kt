@@ -15,7 +15,7 @@ class SnackBarManager {
      * @param color: background color you want the snackbar to have
      * @param gravity: where you want the snackbar to be, default is top. For bottom write Gravity.BOTTOM
      */
-    fun createSnackbar(view: View, text: String, color: Int, gravity: Int = Gravity.TOP) {
+    fun createSnackbar(view: View, text: String, color: Int, gravity: Int = Gravity.BOTTOM) {
         val mSnackBar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
         val sView = mSnackBar.view
         val params = sView.layoutParams as FrameLayout.LayoutParams

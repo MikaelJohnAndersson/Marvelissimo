@@ -32,7 +32,7 @@ object FireBase {
                 if (task.isSuccessful) {
 
                     user = auth.currentUser
-
+                    userDataRef = database.child("users").child(user!!.uid)
                     val intent = Intent(context, MainActivity::class.java)
                     context.startActivity(intent)
                 } else {

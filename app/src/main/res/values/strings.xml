@@ -24,12 +24,14 @@
     <string name="logInButton">Login</string>
     <string name="loginRegisterButton">Register</string>
 
-    <string name="register_first_name">First Name</string>
-    <string name="register_last_name">Last Name</string>
+    <string name="first_name_register">First Name</string>
+    <string name="lastName_register">Last Name</string>
     <string name="register_email">Email</string>
     <string name="register_password">Password</string>
-    <string name="register_signup_button">Not a member? Sign up now.</string>
-    <string name="register_signup_confirm">Sign up now.</string>
-    <string name="signin_failed_missing_fields">Sign in failed, not all fields are set</string>
+    <string name="signup_button_register">Not a member? Sign up now.</string>
+    <string name="signup_confirm_register">Sign up now.</string>
+    <string name="failed_missing_signIn">Sign in failed, not all fields are set</string>
+
+    <string name="fields_missing_registration">Register failed, not all fields were filled</string>
 
 </resources>

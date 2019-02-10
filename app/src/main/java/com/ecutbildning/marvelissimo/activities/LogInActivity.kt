@@ -30,7 +30,7 @@ class LogInActivity : AppCompatActivity() , View.OnClickListener {
             FireBase.signIn(email, password, this, view)
 
         } else {
-            snackbarManager.createSnackbar(view, resources.getString(R.string.signin_failed_missing_fields), Color.RED)
+            snackbarManager.createSnackbar(view, resources.getString(R.string.failed_missing_signIn), Color.RED)
 
         }
     }
