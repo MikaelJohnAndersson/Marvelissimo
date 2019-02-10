@@ -14,8 +14,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var snackbarManager: SnackBarManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        view = findViewById(android.R.id.content)
         setContentView(R.layout.activity_register)
         register_button.setOnClickListener(this)
+        snackbarManager = SnackBarManager()
     }
 
     private fun createAccount(email: String, password: String, firstName: String, lastName: String) {
