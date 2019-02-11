@@ -13,16 +13,12 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MarvelAPI{
 
     @GET("characters")
-    fun getAllCharacters(@Query("limit") limit : Int, @Query("offset") offset : Int): Observable<CharacterDataWrapper>
-
-    @GET("characters")
-    fun getAllCharactersBySearchWord(@Query("nameStartsWith") searchWord : String?, @Query("limit") limit : Int, @Query("offset") offset : Int): Observable<CharacterDataWrapper>
+    fun getCharacters(@Query("offset") offset : Int, @Query("nameStartsWith") searchWord : String?): Observable<CharacterDataWrapper>
 
     @GET("comics")
     fun getAllComics(@Query("limit") limit : Int, @Query("offset") offset : Int): Observable<ComicDataWrapper>
@@ -31,8 +27,8 @@ interface MarvelAPI{
     fun getAllComicsBySearchWord(@Query("titleStartsWith") searchWord : String?, @Query("limit") limit : Int, @Query("offset") offset : Int): Observable<ComicDataWrapper>
 
     companion object {
-        val apiPublic : String = BuildConfig.Marvel_API_Public
-        val apiPrivate : String = BuildConfig.Marvel_API_Private
+        private const val API_PUBLIC : String = BuildConfig.Marvel_API_Public
+        private const val API_PRIVATE : String = BuildConfig.Marvel_API_Private
 
         fun getService(): MarvelAPI {
             val logger = HttpLoggingInterceptor()
@@ -47,9 +43,9 @@ interface MarvelAPI{
                 val ts = (Calendar.getInstance(TimeZone.getTimeZone("UTC")).timeInMillis / 1000L).toString()
 
                 val url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("apikey", apiPublic)
+                    .addQueryParameter("apikey", API_PUBLIC)
                     .addQueryParameter("ts", ts)
-                    .addQueryParameter("hash", (ts + apiPrivate + apiPublic).md5())
+                    .addQueryParameter("hash", (ts + API_PRIVATE + API_PUBLIC).md5())
                     .build()
 
                 chain.proceed(original.newBuilder().url(url).build())
@@ -76,9 +72,9 @@ interface MarvelAPI{
                 val ts = (Calendar.getInstance(TimeZone.getTimeZone("UTC")).timeInMillis / 1000L).toString()
 
                 val url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("apikey",apiPublic)
+                    .addQueryParameter("apikey",API_PUBLIC)
                     .addQueryParameter("ts", ts)
-                    .addQueryParameter("hash", (ts + apiPrivate + apiPublic).md5())
+                    .addQueryParameter("hash", (ts + API_PRIVATE + API_PUBLIC).md5())
                     .build()
 
                 chain.proceed(original.newBuilder().url(url).build())
