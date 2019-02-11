@@ -9,10 +9,8 @@ import com.ecutbildning.marvelissimo.fragments.ComicsSearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import android.support.v7.widget.Toolbar
 import android.support.v7.widget.SearchView
-import com.ecutbildning.marvelissimo.services.paging.CONSTANTS
 import android.support.v4.app.Fragment
 import com.ecutbildning.marvelissimo.R
-import com.ecutbildning.marvelissimo.dtos.Comic
 import com.ecutbildning.marvelissimo.fragments.ISearchFragment
 
 
@@ -44,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         val searchView = searchItem.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                CONSTANTS.search = query
                 val currentFragment = getCurrentFragment() as ISearchFragment
                 currentFragment.makeSearch(query)
                 return true
