@@ -21,10 +21,7 @@ interface MarvelAPI{
     fun getCharacters(@Query("offset") offset : Int, @Query("nameStartsWith") searchWord : String?): Observable<CharacterDataWrapper>
 
     @GET("comics")
-    fun getAllComics(@Query("limit") limit : Int, @Query("offset") offset : Int): Observable<ComicDataWrapper>
-
-    @GET("comics")
-    fun getAllComicsBySearchWord(@Query("titleStartsWith") searchWord : String?, @Query("limit") limit : Int, @Query("offset") offset : Int): Observable<ComicDataWrapper>
+    fun getComics(@Query("offset") offset : Int, @Query("titleStartsWith") searchWord : String?): Observable<ComicDataWrapper>
 
     companion object {
         private const val API_PUBLIC : String = BuildConfig.Marvel_API_Public
