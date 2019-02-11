@@ -13,6 +13,7 @@ import android.os.Parcelable
 import android.support.v7.widget.RecyclerView
 import android.view.*
 import com.ecutbildning.marvelissimo.services.paging.CharactersDataSource
+import kotlinx.android.synthetic.main.fragment_search.*
 
 private const val GRID_SPAN_COUNT = 3
 
@@ -35,6 +36,16 @@ class CharacterSearchFragment : Fragment(), ISearchFragment {
         val rootView = inflater.inflate(R.layout.fragment_search, container, false)
         setUpRecycleView(rootView)
         return rootView
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable("lmState", recyclerView.layoutManager?.onSaveInstanceState())
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        recyclerState = savedInstanceState?.getParcelable("lmState")
     }
 
     private fun onItemClicked(character: Character){
@@ -64,7 +75,7 @@ class CharacterSearchFragment : Fragment(), ISearchFragment {
             }
     }
 
-    override fun makeSearch(search: String?) {
+    override fun makeSearch(search: String) {
         CharactersDataSource.search = search
         adapter.currentList?.dataSource?.invalidate()
     }

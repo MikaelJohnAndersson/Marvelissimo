@@ -30,8 +30,7 @@ class MainActivity : AppCompatActivity() {
         if(savedInstanceState == null) {
 
             supportFragmentManager.beginTransaction()
-                .add(R.id.container, CharacterSearchFragment.newInstance(), CharacterSearchFragment()::class.java.name)
-                .addToBackStack(CharacterSearchFragment()::class.java.name)
+                .add(R.id.container, CharacterSearchFragment.newInstance())
                 .commit()
         }
     }
@@ -43,7 +42,9 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val currentFragment = getCurrentFragment() as ISearchFragment
-                currentFragment.makeSearch(query)
+                if(query != null){
+                    currentFragment.makeSearch(query)
+                }
                 return true
             }
 
@@ -55,8 +56,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getCurrentFragment(): Fragment? {
-        val fragmentTag = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1).name
-        return supportFragmentManager.findFragmentByTag(fragmentTag)
+        val fragments = supportFragmentManager.fragments
+        fragments.forEach {fragment -> if(fragment.isVisible){return fragment}}
+        return null
     }
 
 
@@ -64,29 +66,21 @@ class MainActivity : AppCompatActivity() {
 
         when (item.itemId) {
             R.id.navigation_characters -> {
-                if(getCurrentFragment()!!::class.java.name != CharacterSearchFragment()::class.java.name ){
                     supportFragmentManager.beginTransaction()
                         .replace(
                             R.id.container,
-                            CharacterSearchFragment.newInstance(),
-                            CharacterSearchFragment()::class.java.name
+                            CharacterSearchFragment.newInstance()
                         )
-                        .addToBackStack(CharacterSearchFragment()::class.java.name)
                         .commit()
-                }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_comics -> {
-                if(getCurrentFragment()!!::class.java.name != ComicsSearchFragment()::class.java.name ) {
                     supportFragmentManager.beginTransaction()
                         .replace(
                             R.id.container,
-                            ComicsSearchFragment.newInstance(),
-                            ComicsSearchFragment()::class.java.name
+                            ComicsSearchFragment.newInstance()
                         )
-                        .addToBackStack(ComicsSearchFragment()::class.java.name)
                         .commit()
-                }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_favourites -> {
