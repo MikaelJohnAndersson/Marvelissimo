@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                             CharacterSearchFragment.newInstance(),
                             CharacterSearchFragment()::class.java.name
                         )
+                        .addToBackStack(CharacterSearchFragment()::class.java.name)
                         .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -83,6 +84,7 @@ class MainActivity : AppCompatActivity() {
                             ComicsSearchFragment.newInstance(),
                             ComicsSearchFragment()::class.java.name
                         )
+                        .addToBackStack(ComicsSearchFragment()::class.java.name)
                         .commit()
                 }
                 return@OnNavigationItemSelectedListener true
