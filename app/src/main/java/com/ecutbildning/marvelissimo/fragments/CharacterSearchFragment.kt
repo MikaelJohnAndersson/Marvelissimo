@@ -1,33 +1,31 @@
 package com.ecutbildning.marvelissimo.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.adapters.CharacterRecycleViewAdapter
 import com.ecutbildning.marvelissimo.dtos.Character
-import com.ecutbildning.marvelissimo.dtos.CharacterDataWrapper
-import com.ecutbildning.marvelissimo.services.MarvelAPI
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
+import android.arch.lifecycle.ViewModelProviders
+import android.os.Parcelable
+import android.support.v7.widget.RecyclerView
+import android.view.*
+import com.ecutbildning.marvelissimo.services.paging.CharactersDataSource
 
-
-private const val LIMIT = 20
 private const val GRID_SPAN_COUNT = 3
 
 class CharacterSearchFragment : Fragment(), ISearchFragment {
 
-    private var offset = 0
+    private var recyclerState: Parcelable? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        loadMoreData()
+    private val viewModel: CharactersViewModel by lazy {
+        ViewModelProviders.of(this).get(CharactersViewModel::class.java)
+    }
+
+    private val adapter: CharacterRecycleViewAdapter by lazy {
+        CharacterRecycleViewAdapter { character -> onItemClicked(character)}
     }
 
     override fun onCreateView(
@@ -38,63 +36,41 @@ class CharacterSearchFragment : Fragment(), ISearchFragment {
         setUpRecycleView(rootView)
         return rootView
     }
+
     private fun onItemClicked(character: Character){
          activity?.supportFragmentManager?.beginTransaction()
-            ?.add(R.id.container, CharacterInfoFragment.newInstance(character))
-             ?.addToBackStack(null)
+            ?.add(R.id.container, CharacterInfoFragment.newInstance(character), CharacterInfoFragment::class.java.name)
+             ?.addToBackStack(CharacterInfoFragment::class.java.name)
             ?.commit()
     }
 
-    override fun makeSearch(search: String?) {
-        MarvelAPI.getService().getAllCharactersBySearchWord(search, LIMIT, offset)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { response: CharacterDataWrapper? ->
-                if (response != null) {
-                    val adapter = recyclerView.adapter as CharacterRecycleViewAdapter
-                    adapter.characters.clear()
-                    adapter.characters.addAll(response.data.results)
-                    adapter.notifyDataSetChanged()
-                }
-            }
-    }
-
-    private fun setUpRecycleView(rootView: View, characterList: MutableList<Character> = mutableListOf() ){
+    private fun setUpRecycleView(rootView: View){
         val layoutManager = GridLayoutManager(activity, GRID_SPAN_COUNT)
         val recyclerView = rootView.recyclerView
         recyclerView.layoutManager = layoutManager
-        val adapter = CharacterRecycleViewAdapter(activity as Context, characterList) { character -> onItemClicked(character)}
         recyclerView.adapter = adapter
+        subscribeToList(recyclerView)
+    }
 
-        /*//TODO: Implement solution for earlier versions, or change min SDK
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            recyclerView.setOnScrollChangeListener { _, _, _, _, _ ->
-                run {
-                    val visibleItemCount = layoutManager.childCount
-                    val totalItemCount = layoutManager.itemCount
-                    val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
-                    //Start loading more characters if scroll is at bottom
-                    if (((pastVisibleItems + visibleItemCount) >= totalItemCount) && !adapter.loading) {
-                        loadMoreData()
-                        adapter.loading = true
-                        Toast.makeText(activity, "Loading more characters...", Toast.LENGTH_LONG).show()
-                    }
+    private fun subscribeToList(recyclerView: RecyclerView) {
+        val disposable = viewModel.characterList
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { list ->
+                adapter.submitList(list)
+                if (recyclerState != null) {
+                    recyclerView.layoutManager?.onRestoreInstanceState(recyclerState)
+                    recyclerState = null
                 }
             }
-        }*/
     }
 
     override fun loadMoreData() {
-        MarvelAPI.getService().getAllCharacters(LIMIT, offset)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { response: CharacterDataWrapper? ->
-                if (response != null) {
-                    val adapter = recyclerView.adapter as CharacterRecycleViewAdapter
-                    adapter.characters.addAll(response.data.results)
-                    adapter.notifyDataSetChanged()
-                }
-            }
+
+    }
+
+    override fun makeSearch(search: String?) {
+        CharactersDataSource.search = search
+        adapter.currentList?.dataSource?.invalidate()
     }
 
     companion object {
