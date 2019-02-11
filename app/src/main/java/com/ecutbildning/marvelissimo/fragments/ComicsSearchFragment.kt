@@ -64,10 +64,6 @@ class ComicsSearchFragment : Fragment(), ISearchFragment {
             }
     }
 
-    override fun loadMoreData() {
-
-    }
-
     override fun makeSearch(search: String?) {
         ComicsDataSource.search = search
         adapter.currentList?.dataSource?.invalidate()

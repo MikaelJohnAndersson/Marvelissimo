@@ -64,10 +64,6 @@ class CharacterSearchFragment : Fragment(), ISearchFragment {
             }
     }
 
-    override fun loadMoreData() {
-
-    }
-
     override fun makeSearch(search: String?) {
         CharactersDataSource.search = search
         adapter.currentList?.dataSource?.invalidate()
