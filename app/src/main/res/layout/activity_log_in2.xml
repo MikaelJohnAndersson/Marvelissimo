@@ -23,41 +23,40 @@
         app:srcCompat="@drawable/marvel_logo_300x300" />
 
     <EditText
-        android:id="@+id/login_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        android:autofillHints="@string/hintLogInEmail"
-        android:contentDescription="@string/email_field"
-        android:ems="10"
-        android:hint="@string/hintLogInEmail"
-        android:inputType="textEmailAddress"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+            android:id="@+id/login_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:autofillHints="@string/hintLogInEmail"
+            android:ems="10"
+            android:hint="@string/hintLogInEmail"
+            android:inputType="textEmailAddress"
+            android:text="meamo@yahoo.com"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:contentDescription="@string/email_field"/>
 
 
     <EditText
-        android:id="@+id/login_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:autofillHints="@string/hintLoginPassword"
-        android:contentDescription="@string/password_field"
-        android:ems="10"
-        android:hint="@string/hintLoginPassword"
-        android:inputType="textPassword"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="@+id/login_email"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/login_email"
-        app:layout_constraintTop_toBottomOf="@+id/login_email" />
-
+            android:id="@+id/login_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:autofillHints="@string/hintLoginPassword"
+            android:ems="10"
+            android:hint="@string/hintLoginPassword"
+            android:inputType="textPassword"
+            android:text="meamomeamo"
+            app:layout_constraintEnd_toEndOf="@+id/login_email"
+            app:layout_constraintStart_toStartOf="@+id/login_email"
+            app:layout_constraintTop_toBottomOf="@+id/login_email" app:layout_constraintHorizontal_bias="0.0"
+            android:contentDescription="@string/password_field"/>
+>>>>>>> user navigation added
     <Button
         android:id="@+id/btnLogIn"
         android:layout_width="0dp"
