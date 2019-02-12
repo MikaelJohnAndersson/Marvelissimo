@@ -4,25 +4,25 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import com.ecutbildning.marvelissimo.R
-import com.ecutbildning.marvelissimo.adapters.CharacterRecycleViewAdapter
-import com.ecutbildning.marvelissimo.dtos.Character
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.widget.SearchView
 import android.view.*
-import com.ecutbildning.marvelissimo.services.paging.CharactersDataSource
+import com.ecutbildning.marvelissimo.adapters.ComicRecycleViewAdapter
+import com.ecutbildning.marvelissimo.dtos.Comic
+import com.ecutbildning.marvelissimo.services.paging.ComicsDataSource
 
 private const val GRID_SPAN_COUNT = 3
 
-class CharacterSearchFragment : Fragment(), ISearchFragment {
+class ComicsSearchFragment : Fragment(), ISearchFragment {
 
-    private val viewModel: CharactersViewModel by lazy {
-        ViewModelProviders.of(this).get(CharactersViewModel::class.java)
+    private val viewModel: ComicsViewModel by lazy {
+        ViewModelProviders.of(this).get(ComicsViewModel::class.java)
     }
 
-    private val adapter: CharacterRecycleViewAdapter by lazy {
-        CharacterRecycleViewAdapter { character -> onItemClicked(character)}
+    private val adapter: ComicRecycleViewAdapter by lazy {
+        ComicRecycleViewAdapter { comic -> onItemClicked(comic)}
     }
 
     override fun onCreateView(
@@ -41,15 +41,15 @@ class CharacterSearchFragment : Fragment(), ISearchFragment {
         searchView.isIconified = true
     }
 
-    private fun onItemClicked(character: Character){
-         activity?.supportFragmentManager?.beginTransaction()
-            ?.add(R.id.container, CharacterInfoFragment.newInstance(character))
-             ?.addToBackStack(null)
+    private fun onItemClicked(comic: Comic){
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.add(R.id.container, ComicInfoFragment.newInstance(comic))
+            ?.addToBackStack(null)
             ?.commit()
     }
 
     private fun setUpRecycleView(rootView: View){
-        CharactersDataSource.search = null
+        ComicsDataSource.search = null
         val layoutManager = GridLayoutManager(activity, GRID_SPAN_COUNT)
         val recyclerView = rootView.recyclerView
         recyclerView.layoutManager = layoutManager
@@ -58,7 +58,7 @@ class CharacterSearchFragment : Fragment(), ISearchFragment {
     }
 
     private fun subscribeToList() {
-        val disposable = viewModel.characterList
+        val disposable = viewModel.comicList
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { list ->
                 adapter.submitList(list)
@@ -66,12 +66,12 @@ class CharacterSearchFragment : Fragment(), ISearchFragment {
     }
 
     override fun makeSearch(search: String?) {
-        CharactersDataSource.search = search
+        ComicsDataSource.search = search
         adapter.currentList?.dataSource?.invalidate()
     }
 
     companion object {
         @JvmStatic
-        fun newInstance() = CharacterSearchFragment()
+        fun newInstance() = ComicsSearchFragment()
     }
 }

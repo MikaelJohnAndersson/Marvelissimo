@@ -10,14 +10,15 @@
 
     <android.support.v7.widget.Toolbar
             android:id="@+id/top_toolbar"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="16dp">
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -46,6 +47,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:menu="@menu/navigation"/>
+            app:menu="@menu/bottom_navigation"/>
 
 </android.support.constraint.ConstraintLayout>

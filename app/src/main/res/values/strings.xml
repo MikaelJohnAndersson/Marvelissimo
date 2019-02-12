@@ -8,4 +8,30 @@
     <string name="title_characters">Characters</string>
     <string name="title_comics">Comics</string>
     <string name="title_favourites">Favourites</string>
+
+    <string name="no_description_found">No description found</string>
+
+
+    <string name="login_logo">LoginLogo</string>
+    <string name="user_login_icon">User</string>
+    <string name="password_login_icon">Password</string>
+    <string name="email_field">EmailField</string>
+    <string name="password_field">PasswordField</string>
+
+
+    <string name="hintLogInEmail">Email</string>
+    <string name="hintLoginPassword">Password</string>
+    <string name="logInButton">Login</string>
+    <string name="loginRegisterButton">Register</string>
+
+    <string name="first_name_register">First Name</string>
+    <string name="lastName_register">Last Name</string>
+    <string name="register_email">Email</string>
+    <string name="register_password">Password</string>
+    <string name="signup_button_register">Not a member? Sign up now.</string>
+    <string name="signup_confirm_register">Sign up now.</string>
+    <string name="failed_missing_signIn">Sign in failed, not all fields are set</string>
+
+    <string name="fields_missing_registration">Register failed, not all fields were filled</string>
+
 </resources>

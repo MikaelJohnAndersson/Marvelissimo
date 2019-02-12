@@ -4,8 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class CharacterDataWrapper(
-    val code: Int,
-    val etag: String,
-    val data : CharacterDataContainer
+data class ContentInfoItem (
+    val resourceURI : String,
+    val name : String
 ): Parcelable
