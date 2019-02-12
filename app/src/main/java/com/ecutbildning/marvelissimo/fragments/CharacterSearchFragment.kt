@@ -9,6 +9,7 @@ import com.ecutbildning.marvelissimo.dtos.Character
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import android.arch.lifecycle.ViewModelProviders
+import android.support.v7.widget.SearchView
 import android.view.*
 import com.ecutbildning.marvelissimo.services.paging.CharactersDataSource
 
@@ -28,9 +29,16 @@ class CharacterSearchFragment : Fragment(), ISearchFragment {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         val rootView = inflater.inflate(R.layout.fragment_search, container, false)
         setUpRecycleView(rootView)
         return rootView
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        val searchView = menu?.findItem(R.id.navigation_search)?.actionView as SearchView
+        searchView.isIconified = true
     }
 
     private fun onItemClicked(character: Character){

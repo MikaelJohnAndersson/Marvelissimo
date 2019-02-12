@@ -37,8 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu:Menu):Boolean {
         menuInflater.inflate(R.menu.top_navigation, menu)
-        val searchItem = menu.findItem(R.id.navigation_search)
-        val searchView = searchItem.actionView as SearchView
+        val searchView = menu.findItem(R.id.navigation_search).actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val currentFragment = getCurrentFragment() as ISearchFragment
