@@ -7,19 +7,15 @@ import com.ecutbildning.marvelissimo.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import android.arch.lifecycle.ViewModelProviders
-import android.os.Parcelable
 import android.support.v7.widget.RecyclerView
 import android.view.*
 import com.ecutbildning.marvelissimo.adapters.ComicRecycleViewAdapter
 import com.ecutbildning.marvelissimo.dtos.Comic
 import com.ecutbildning.marvelissimo.services.paging.ComicsDataSource
-import kotlinx.android.synthetic.main.fragment_search.*
 
 private const val GRID_SPAN_COUNT = 3
 
 class ComicsSearchFragment : Fragment(), ISearchFragment {
-
-    private var recyclerState: Parcelable? = null
 
     private val viewModel: ComicsViewModel by lazy {
         ViewModelProviders.of(this).get(ComicsViewModel::class.java)
@@ -38,16 +34,6 @@ class ComicsSearchFragment : Fragment(), ISearchFragment {
         return rootView
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putParcelable("lmState", recyclerView.layoutManager?.onSaveInstanceState())
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        recyclerState = savedInstanceState?.getParcelable("lmState")
-    }
-
     private fun onItemClicked(comic: Comic){
         activity?.supportFragmentManager?.beginTransaction()
             ?.add(R.id.container, ComicInfoFragment.newInstance(comic), ComicInfoFragment::class.java.name)
@@ -60,18 +46,14 @@ class ComicsSearchFragment : Fragment(), ISearchFragment {
         val recyclerView = rootView.recyclerView
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
-        subscribeToList(recyclerView)
+        subscribeToList()
     }
 
-    private fun subscribeToList(recyclerView: RecyclerView) {
+    private fun subscribeToList() {
         val disposable = viewModel.comicList
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { list ->
                 adapter.submitList(list)
-                if (recyclerState != null) {
-                    recyclerView.layoutManager?.onRestoreInstanceState(recyclerState)
-                    recyclerState = null
-                }
             }
     }
 
