@@ -21,17 +21,12 @@ class ComicInfoFragment : InfoFragment() {
     override val INFO_OBJECT: String
         get() = "COMIC"
 
-    override val data: HashMap<String, List<String>>
-        get() {
-            val listData = HashMap<String, List<String>>()
-
-            listData["Characters"] = ArrayList()
-            listData["Creators"] = ArrayList()
-            listData["Stories"] = ArrayList()
-            listData["Events"] = ArrayList()
-
-            return listData
-        }
+    override val data = hashMapOf<String, List<String>>(
+        "Characters" to ArrayList(),
+        "Creators" to ArrayList(),
+        "Stories" to ArrayList(),
+        "Events" to ArrayList()
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +35,6 @@ class ComicInfoFragment : InfoFragment() {
 
         val rootView = super.onCreateView(inflater, container, savedInstanceState)
 
-        val listData = data
         val comic = infoObject as Comic
 
         val title = rootView?.title
@@ -58,22 +52,22 @@ class ComicInfoFragment : InfoFragment() {
         }
         if(!comic.characters.items.isNullOrEmpty()){
             val characterInfo = comic.characters.items.joinToString("\n") { it.name }
-            val characterData = listData["Characters"] as ArrayList<String>
+            val characterData = data["Characters"] as ArrayList<String>
             characterData.add(characterInfo)
         }
         if (!comic.creators.items.isNullOrEmpty()){
             val creatorsInfo = comic.creators.items.joinToString("\n") { it.name }
-            val creatorsData = listData["Creators"] as ArrayList<String>
+            val creatorsData = data["Creators"] as ArrayList<String>
             creatorsData.add(creatorsInfo)
         }
         if(!comic.stories.items.isNullOrEmpty()){
             val storiesInfo = comic.stories.items.joinToString("\n") { it.name }
-            val storiesData = listData["Stories"] as ArrayList<String>
+            val storiesData = data["Stories"] as ArrayList<String>
             storiesData.add(storiesInfo)
         }
         if(!comic.events.items.isNullOrEmpty()){
             val eventInfo = comic.events.items.joinToString("\n") { it.name }
-            val eventData = listData["Events"] as ArrayList<String>
+            val eventData = data["Events"] as ArrayList<String>
             eventData.add(eventInfo)
         }
         return rootView
