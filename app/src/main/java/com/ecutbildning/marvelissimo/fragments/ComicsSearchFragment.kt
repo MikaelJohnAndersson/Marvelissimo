@@ -3,6 +3,7 @@ package com.ecutbildning.marvelissimo.fragments
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -92,6 +93,7 @@ class ComicsSearchFragment : Fragment(), ISearchFragment {
     private fun onItemClicked(comic: Comic){
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.container, ComicInfoFragment.newInstance(comic))
+            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             ?.addToBackStack(null)
             ?.commit()
     }

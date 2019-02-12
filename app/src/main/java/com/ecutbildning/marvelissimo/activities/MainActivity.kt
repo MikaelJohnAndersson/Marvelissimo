@@ -1,5 +1,6 @@
 package com.ecutbildning.marvelissimo.activities
 
+import android.app.FragmentTransaction
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .add(R.id.container, CharacterSearchFragment.newInstance(), "ACTIVE_FRAGMENT")
                 .addToBackStack("ACTIVE_FRAGMENT")
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit()
         }
     }
@@ -60,6 +62,7 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.container, CharacterSearchFragment.newInstance(), "ACTIVE_FRAGMENT")
                     .addToBackStack("ACTIVE_FRAGMENT")
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
@@ -67,6 +70,7 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.container, ComicsSearchFragment.newInstance(), "ACTIVE_FRAGMENT")
                     .addToBackStack("ACTIVE_FRAGMENT")
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
