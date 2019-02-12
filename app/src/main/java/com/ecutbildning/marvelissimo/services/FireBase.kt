@@ -4,10 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.view.View
-import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.activities.MainActivity
 import com.ecutbildning.marvelissimo.dtos.User
-import com.ecutbildning.marvelissimo.snackBar.SnackBarManager
+import com.ecutbildning.marvelissimo.utilities.SnackBarManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth

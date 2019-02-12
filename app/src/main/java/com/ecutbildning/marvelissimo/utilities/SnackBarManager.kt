@@ -1,4 +1,4 @@
-package com.ecutbildning.marvelissimo.snackBar
+package com.ecutbildning.marvelissimo.utilities
 
 import android.graphics.Color
 import android.support.design.widget.Snackbar
