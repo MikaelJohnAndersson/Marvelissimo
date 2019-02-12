@@ -42,9 +42,7 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val currentFragment = getCurrentFragment() as ISearchFragment
-                if(query != null){
                     currentFragment.makeSearch(query)
-                }
                 return true
             }
 
@@ -60,7 +58,6 @@ class MainActivity : AppCompatActivity() {
         fragments.forEach {fragment -> if(fragment.isVisible){return fragment}}
         return null
     }
-
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 

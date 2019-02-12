@@ -42,6 +42,7 @@ class ComicsSearchFragment : Fragment(), ISearchFragment {
     }
 
     private fun setUpRecycleView(rootView: View){
+        ComicsDataSource.search = null
         val layoutManager = GridLayoutManager(activity, GRID_SPAN_COUNT)
         val recyclerView = rootView.recyclerView
         recyclerView.layoutManager = layoutManager
@@ -57,7 +58,7 @@ class ComicsSearchFragment : Fragment(), ISearchFragment {
             }
     }
 
-    override fun makeSearch(search: String) {
+    override fun makeSearch(search: String?) {
         ComicsDataSource.search = search
         adapter.currentList?.dataSource?.invalidate()
     }
