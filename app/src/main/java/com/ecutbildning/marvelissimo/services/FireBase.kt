@@ -69,5 +69,13 @@ object FireBase {
     fun deleteFavorite(itemId: String) {
         userDataRef.child("favoriteCharacters/$itemId").removeValue()
     }
+    fun signOut () {
+        auth.signOut()
+    }
+
+    fun dispLayUserEmail():String?{
+
+        return user?.email
+    }
 
 }
