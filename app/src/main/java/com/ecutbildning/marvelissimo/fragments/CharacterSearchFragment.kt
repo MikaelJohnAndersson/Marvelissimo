@@ -43,8 +43,8 @@ class CharacterSearchFragment : Fragment(), ISearchFragment {
 
     private fun onItemClicked(character: Character){
          activity?.supportFragmentManager?.beginTransaction()
-            ?.add(R.id.container, CharacterInfoFragment.newInstance(character), CharacterInfoFragment::class.java.name)
-             ?.addToBackStack(CharacterInfoFragment::class.java.name)
+            ?.add(R.id.container, CharacterInfoFragment.newInstance(character))
+             ?.addToBackStack(null)
             ?.commit()
     }
 

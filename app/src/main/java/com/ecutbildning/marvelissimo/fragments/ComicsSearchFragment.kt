@@ -43,8 +43,8 @@ class ComicsSearchFragment : Fragment(), ISearchFragment {
 
     private fun onItemClicked(comic: Comic){
         activity?.supportFragmentManager?.beginTransaction()
-            ?.add(R.id.container, ComicInfoFragment.newInstance(comic), ComicInfoFragment::class.java.name)
-            ?.addToBackStack(ComicInfoFragment::class.java.name)
+            ?.add(R.id.container, ComicInfoFragment.newInstance(comic))
+            ?.addToBackStack(null)
             ?.commit()
     }
 
