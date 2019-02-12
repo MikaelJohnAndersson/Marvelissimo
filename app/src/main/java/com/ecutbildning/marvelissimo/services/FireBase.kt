@@ -39,7 +39,7 @@ object FireBase {
                     userDataRef = database.child("users").child(user!!.uid)
                     val intent = Intent(context, MainActivity::class.java)
                     intent.putExtra("userEmail",dispLayUserEmail())
-
+                    intent.putExtra("userName", dispLayUserName())
                     context.startActivity(intent)
                 } else {
                     snackBarManager.createSnackbar(view, "Wrong credentials", Color.RED)
@@ -82,6 +82,9 @@ object FireBase {
 
         return user?.email
     }
-    
+    fun dispLayUserName():String?{
+
+        return user?.displayName
+    }
 
 }

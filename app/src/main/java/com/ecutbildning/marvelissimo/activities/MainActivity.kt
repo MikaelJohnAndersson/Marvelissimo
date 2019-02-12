@@ -1,9 +1,9 @@
 package com.ecutbildning.marvelissimo.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
-import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -17,9 +17,9 @@ import android.support.v4.app.Fragment
 import com.ecutbildning.marvelissimo.R
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import com.ecutbildning.marvelissimo.fragments.ISearchFragment
 import com.ecutbildning.marvelissimo.services.FireBase
-import kotlinx.android.synthetic.main.app_bar_navigation_drawer.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -51,6 +51,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         menuInflater.inflate(R.menu.navigation_drawer, menu)
         val userEmail: TextView = findViewById(R.id.userEmail) as TextView
         userEmail.text=intent.getStringExtra("userEmail")
+      //  val userName: TextView = findViewById(R.id.userName) as TextView
+      //  userName.text=intent.getStringExtra("userName")
+
+
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, top_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
@@ -149,6 +153,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.logout -> {
             FireBase.signOut()
+                val intent = Intent(this, LogInActivity::class.java)
+                startActivity(intent)
             }
         }
 
