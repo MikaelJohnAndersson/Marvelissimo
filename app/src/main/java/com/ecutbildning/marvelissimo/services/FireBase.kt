@@ -15,12 +15,14 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 object FireBase {
+
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private  var user: FirebaseUser? = null
     private var snackBarManager: SnackBarManager = SnackBarManager()
     private lateinit var userDataRef: DatabaseReference
     private var database: DatabaseReference = FirebaseDatabase.getInstance().reference
-    fun toggleOnline(status: Boolean) {
+
+    private fun toggleOnline(status: Boolean) {
         if (user != null)
             userDataRef.child("online").setValue(status)
     }
@@ -35,7 +37,7 @@ object FireBase {
                     val intent = Intent(context, MainActivity::class.java)
                     context.startActivity(intent)
                 } else {
-                    snackBarManager.createSnackbar(view, "wrong credentials", Color.RED)
+                    snackBarManager.createSnackbar(view, "Wrong credentials", Color.RED)
                 }
 
             }
@@ -51,7 +53,7 @@ object FireBase {
                     val intent = Intent(context, MainActivity::class.java)
                     context.startActivity(intent)
                 } else {
-                    snackBarManager.createSnackbar(view, "registration failed", Color.RED)
+                    snackBarManager.createSnackbar(view, "Registration failed", Color.RED)
                 }
             }
     }
