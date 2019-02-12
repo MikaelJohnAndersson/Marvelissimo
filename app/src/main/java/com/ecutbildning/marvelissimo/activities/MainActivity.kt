@@ -16,7 +16,9 @@ import android.support.v7.widget.SearchView
 import android.support.v4.app.Fragment
 import com.ecutbildning.marvelissimo.R
 import android.view.MenuItem
+import android.widget.TextView
 import com.ecutbildning.marvelissimo.fragments.ISearchFragment
+import com.ecutbildning.marvelissimo.services.FireBase
 import kotlinx.android.synthetic.main.app_bar_navigation_drawer.*
 
 
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val mTopToolbar = findViewById<Toolbar>(R.id.top_toolbar)
         setSupportActionBar(mTopToolbar)
+        mTopToolbar.bringToFront()
 
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
@@ -46,11 +49,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreateOptionsMenu(menu:Menu):Boolean {
         menuInflater.inflate(R.menu.top_navigation, menu)
         menuInflater.inflate(R.menu.navigation_drawer, menu)
-
+        val userEmail: TextView = findViewById(R.id.userEmail) as TextView
+        userEmail.text=intent.getStringExtra("userEmail")
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, top_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
         drawer_layout.addDrawerListener(toggle)
+        drawer_layout.bringToFront()
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
@@ -105,23 +110,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-   /* override fun onBackPressed() {
-=======
+   /*
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
-
->>>>>>> user navigation added
-        if (fragmentManager.backStackEntryCount == 0){
-            super.onBackPressed()
-        }
-        else{
-            fragmentManager.popBackStack()
-        }
-<<<<<<< HEAD
     }*/
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -152,8 +147,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_share -> {
 
             }
-            R.id.nav_send -> {
-
+            R.id.logout -> {
+            FireBase.signOut()
             }
         }
 
