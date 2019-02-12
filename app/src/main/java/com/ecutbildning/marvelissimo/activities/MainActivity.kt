@@ -22,6 +22,8 @@ import com.ecutbildning.marvelissimo.fragments.ISearchFragment
 import com.ecutbildning.marvelissimo.services.FireBase
 
 
+
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +46,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 .commit()
         }
 
+    }
+
+    override fun onStop() {
+        FireBase.signOut()
+        super.onStop()
     }
 
     override fun onCreateOptionsMenu(menu:Menu):Boolean {
