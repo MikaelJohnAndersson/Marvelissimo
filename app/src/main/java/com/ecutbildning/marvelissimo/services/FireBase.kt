@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.view.View
+import android.widget.TextView
+import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.activities.MainActivity
 import com.ecutbildning.marvelissimo.dtos.User
 import com.ecutbildning.marvelissimo.utilities.SnackBarManager
@@ -32,9 +34,12 @@ object FireBase {
             .addOnCompleteListener { task: Task<AuthResult> ->
                 if (task.isSuccessful) {
 
+
                     user = auth.currentUser
                     userDataRef = database.child("users").child(user!!.uid)
                     val intent = Intent(context, MainActivity::class.java)
+                    intent.putExtra("userEmail",dispLayUserEmail())
+
                     context.startActivity(intent)
                 } else {
                     snackBarManager.createSnackbar(view, "Wrong credentials", Color.RED)
@@ -77,5 +82,6 @@ object FireBase {
 
         return user?.email
     }
+    
 
 }
