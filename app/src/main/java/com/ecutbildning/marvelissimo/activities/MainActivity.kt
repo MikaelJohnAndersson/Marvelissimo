@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_manage -> {
 
             }
-            R.id.nav_share -> {
+            R.id.friend_list -> {
 
             }
             R.id.logout -> {
