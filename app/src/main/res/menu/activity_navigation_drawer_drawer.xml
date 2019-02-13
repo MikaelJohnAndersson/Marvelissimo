@@ -25,13 +25,13 @@
     <item android:title="Friends">
         <menu>
             <item
-                    android:id="@+id/nav_share"
+                    android:id="@+id/friend_list"
                     android:icon="@drawable/ic_menu_share"
                     android:title="UserList"/>
             <item
                     android:id="@+id/logout"
                     android:icon="@drawable/ic_menu_send"
-                    android:title="Lpgout"/>
+                    android:title="Logout"/>
         </menu>
     </item>
 
