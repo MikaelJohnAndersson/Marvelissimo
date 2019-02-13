@@ -7,10 +7,13 @@ import android.view.View
 import com.ecutbildning.marvelissimo.activities.MainActivity
 import com.ecutbildning.marvelissimo.dtos.User
 import com.ecutbildning.marvelissimo.utilities.SnackBarManager
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 
 object FireBase {
 
@@ -27,7 +30,7 @@ object FireBase {
                         FirebaseFirestore.getInstance().collection("users")
                             .document(currentUserUid)
                             .get()
-                            .addOnSuccessListener { documentSnapshot ->
+                            .addOnSuccessListener { documentSnapshot  ->
                                 currentUser = documentSnapshot.toObject(User::class.java)
                                 val intent = Intent(context, MainActivity::class.java)
                                 context.startActivity(intent)
@@ -50,6 +53,13 @@ object FireBase {
                     snackBarManager.createSnackbar(view, "Registration failed", Color.RED)
                 }
             }
+    }
+
+    fun loadOnlineUsers(onSuccessListener : (QuerySnapshot) -> Unit){
+        FirebaseFirestore.getInstance().collection("users")
+            .whereEqualTo("loggedIn", true)
+            .get()
+            .addOnSuccessListener(onSuccessListener)
     }
 
     private fun writeNewUser(firstName: String, lastName: String, email: String) {

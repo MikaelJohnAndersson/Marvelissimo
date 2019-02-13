@@ -25,7 +25,7 @@
     <item android:title="Friends">
         <menu>
             <item
-                    android:id="@+id/friend_list"
+                    android:id="@+id/userlist"
                     android:icon="@drawable/ic_menu_share"
                     android:title="UserList"/>
             <item

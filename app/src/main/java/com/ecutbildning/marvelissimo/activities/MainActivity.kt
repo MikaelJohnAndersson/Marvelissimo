@@ -11,13 +11,13 @@ import android.view.Menu
 import com.ecutbildning.marvelissimo.fragments.CharacterSearchFragment
 import com.ecutbildning.marvelissimo.fragments.ComicsSearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import android.support.v7.widget.Toolbar
 import android.support.v7.widget.SearchView
 import android.support.v4.app.Fragment
 import com.ecutbildning.marvelissimo.R
+import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
-import android.widget.Toast
+import com.ecutbildning.marvelissimo.dtos.User
 import com.ecutbildning.marvelissimo.fragments.ISearchFragment
 import com.ecutbildning.marvelissimo.services.FireBase
 
@@ -54,11 +54,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         menuInflater.inflate(R.menu.top_navigation, menu)
         menuInflater.inflate(R.menu.navigation_drawer, menu)
 
-        val user = FireBase.currentUser
+        val currentUser = FireBase.currentUser
         val userEmail: TextView = findViewById(R.id.userEmail)
-        userEmail.text = user?.email
+        userEmail.text = currentUser?.email
         val userName: TextView = findViewById(R.id.userName)
-        userName.text = "${user?.firstName} ${user?.lastName}"
+        userName.text = "${currentUser?.firstName} ${currentUser?.lastName}"
+
+        FireBase.loadOnlineUsers { documents ->
+            for (document in documents) {
+                val user = document.toObject(User::class.java)
+                Log.d("MAIN_ACTIVITY", user.firstName + " " + user.lastName)
+            }
+
+        }
+
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, top_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -153,7 +162,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_manage -> {
 
             }
-            R.id.friend_list -> {
+            R.id.userlist -> {
 
             }
             R.id.logout -> {
