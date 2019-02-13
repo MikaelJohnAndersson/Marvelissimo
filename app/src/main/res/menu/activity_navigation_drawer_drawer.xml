@@ -25,7 +25,13 @@
     <item android:title="Friends">
         <menu>
             <item
+<<<<<<< HEAD
                     android:id="@+id/userlist"
+=======
+
+                    android:id="@+id/userlist"
+
+>>>>>>> fixes
                     android:icon="@drawable/ic_menu_share"
                     android:title="UserList"/>
             <item
