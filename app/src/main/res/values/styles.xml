@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorVillainDark</item>
         <item name="colorAccent">@color/colorPower</item>
 
+
     </style>
 
 </resources>
