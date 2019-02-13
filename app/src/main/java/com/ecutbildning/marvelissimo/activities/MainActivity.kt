@@ -24,6 +24,10 @@ import com.ecutbildning.marvelissimo.services.FireBase
 
 
 
+
+
+
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -150,26 +154,33 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
 
-            }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_manage -> {
-
-            }
-            R.id.userlist -> {
-
-            }
             R.id.logout -> {
             FireBase.signOut()
                 val intent = Intent(this, LogInActivity::class.java)
                 startActivity(intent)
             }
+        }
+        val nv = findViewById(R.id.nav_view) as NavigationView
+        val m = nv.menu
+        val id = item.itemId
+
+        if (id === R.id.nav_friends) {
+            val b = !m.findItem(R.id.nav_online).isVisible()
+            m.findItem(R.id.nav_online).setVisible(b)
+            m.findItem(R.id.nav_offline).setVisible(b)
+            return true
+        }  else if (id == R.id.nav_favourites) {
+            val b =!m.findItem(R.id.nav_show_fav).isVisible()
+            m.findItem(R.id.nav_show_fav).setVisible(b)
+            m.findItem(R.id.nav_manage_fav).setVisible(b)
+            return true
+        } else if (id === R.id.nav_logout) {
+
+            m.findItem(R.id.logout).setVisible(false)
+
+        } else if (id === R.id.logout) {
+            FireBase.signOut()
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
