@@ -30,10 +30,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(top_toolbar)
-
-        val mTopToolbar = findViewById<Toolbar>(R.id.top_toolbar)
-        setSupportActionBar(mTopToolbar)
-        mTopToolbar.bringToFront()
+        top_toolbar.bringToFront()
 
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
@@ -56,11 +53,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreateOptionsMenu(menu:Menu):Boolean {
         menuInflater.inflate(R.menu.top_navigation, menu)
         menuInflater.inflate(R.menu.navigation_drawer, menu)
-        val userEmail: TextView = findViewById(R.id.userEmail) as TextView
-        userEmail.text=intent.getStringExtra("userEmail")
-      //  val userName: TextView = findViewById(R.id.userName) as TextView
-      //  userName.text=intent.getStringExtra("userName")
 
+        val user = FireBase.currentUser
+        val userEmail: TextView = findViewById(R.id.userEmail)
+        userEmail.text = user?.email
+        val userName: TextView = findViewById(R.id.userName)
+        userName.text = "${user?.firstName} ${user?.lastName}"
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, top_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close

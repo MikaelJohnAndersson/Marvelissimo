@@ -4,47 +4,38 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.view.View
-import android.widget.TextView
-import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.activities.MainActivity
 import com.ecutbildning.marvelissimo.dtos.User
 import com.ecutbildning.marvelissimo.utilities.SnackBarManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 
 object FireBase {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private  var user: FirebaseUser? = null
     private var snackBarManager: SnackBarManager = SnackBarManager()
-    private lateinit var userDataRef: DatabaseReference
-    private var database: DatabaseReference = FirebaseDatabase.getInstance().reference
-
-    private fun toggleOnline(status: Boolean) {
-        if (user != null)
-            userDataRef.child("online").setValue(status)
-    }
+    var currentUser: User?=null
 
     fun signIn(email: String, password: String, context: Context, view: View) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task: Task<AuthResult> ->
                 if (task.isSuccessful) {
-
-
-                    user = auth.currentUser
-                    userDataRef = database.child("users").child(user!!.uid)
-                    val intent = Intent(context, MainActivity::class.java)
-                    intent.putExtra("userEmail",dispLayUserEmail())
-                    intent.putExtra("userName", dispLayUserName())
-                    context.startActivity(intent)
+                    val currentUserUid = auth.currentUser?.uid
+                    if (currentUserUid != null){
+                        FirebaseFirestore.getInstance().collection("users")
+                            .document(currentUserUid)
+                            .get()
+                            .addOnSuccessListener { documentSnapshot ->
+                                currentUser = documentSnapshot.toObject(User::class.java)
+                                val intent = Intent(context, MainActivity::class.java)
+                                context.startActivity(intent)
+                            }
+                    }
                 } else {
                     snackBarManager.createSnackbar(view, "Wrong credentials", Color.RED)
                 }
-
             }
     }
 
@@ -52,9 +43,7 @@ object FireBase {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task: Task<AuthResult> ->
                 if (task.isSuccessful) {
-                    user = auth.currentUser
-                    userDataRef = database.child("users").child(user!!.uid)
-                    writeNewUser(firstName, lastName, user?.email!!, user?.uid!!)
+                    writeNewUser(firstName, lastName, email)
                     val intent = Intent(context, MainActivity::class.java)
                     context.startActivity(intent)
                 } else {
@@ -62,29 +51,23 @@ object FireBase {
                 }
             }
     }
-    private fun writeNewUser(firstName: String, lastName: String, email: String, uid: String) {
-        val newUser = User(email, firstName, lastName)
-        userDataRef.setValue(newUser)
-        toggleOnline(true)
+
+    private fun writeNewUser(firstName: String, lastName: String, email: String) {
+        val newUser = User(email, firstName, lastName, true)
+        val database = FirebaseFirestore.getInstance()
+        val currentUserUid = auth.currentUser?.uid
+        if (currentUserUid != null)
+            database.collection("users").document(currentUserUid).set(newUser)
     }
+
     fun addFavorite(itemId: String) {
-        userDataRef.child("favoriteCharacters/$itemId").setValue(true)
+        //TODO: Implement
     }
 
     fun deleteFavorite(itemId: String) {
-        userDataRef.child("favoriteCharacters/$itemId").removeValue()
+        //TODO: Implement
     }
     fun signOut () {
         auth.signOut()
     }
-
-    fun dispLayUserEmail():String?{
-
-        return user?.email
-    }
-    fun dispLayUserName():String?{
-
-        return user?.displayName
-    }
-
 }
