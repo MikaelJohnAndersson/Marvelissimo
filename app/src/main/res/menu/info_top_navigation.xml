@@ -6,7 +6,7 @@
 
     <item
     android:id="@+id/menu-favorite"
-    android:icon="@drawable/icons8_heart_outline_50"
+    android:icon="@drawable/far_heart"
     android:title="@string/title_favourites"
     app:showAsAction="always"/>
 
