@@ -80,6 +80,7 @@ object FireBase {
         //TODO: Implement
     }
     fun signOut () {
+        currentUser?.loggedIn=false
         auth.signOut()
     }
 }
