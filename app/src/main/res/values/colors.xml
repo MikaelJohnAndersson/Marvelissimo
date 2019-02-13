@@ -5,6 +5,8 @@
     <color name="colorHeroLight">#2E5DA3</color>
     <color name="colorHero">#1A287A</color>
     <color name="colorHeroDark">#121A50</color>
+    <color name="darkOcean">#000029</color>
+
 
     <!-- Villain colors -->
     <color name="colorVillainLightest">#B54743</color>

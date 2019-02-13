@@ -14,17 +14,12 @@ class CharacterInfoFragment : InfoFragment() {
     override val INFO_OBJECT: String
         get() = "CHARACTER"
 
-    override val data: HashMap<String, List<String>>
-        get() {
-            val listData = HashMap<String, List<String>>()
-
-            listData["Comics"] = ArrayList()
-            listData["Stories"] = ArrayList()
-            listData["Events"] = ArrayList()
-            listData["Series"] = ArrayList()
-
-            return listData
-        }
+    override val data = hashMapOf<String, List<String>>(
+        "Comics" to ArrayList(),
+        "Stories" to ArrayList(),
+        "Events" to ArrayList(),
+        "Series" to ArrayList()
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +28,6 @@ class CharacterInfoFragment : InfoFragment() {
 
         val rootView = super.onCreateView(inflater, container, savedInstanceState)
 
-        val listData = data
         val character = infoObject as Character
 
         val title = rootView?.title
@@ -50,34 +44,31 @@ class CharacterInfoFragment : InfoFragment() {
             description?.text = character.description
         }
 
+        val comicData = data["Comics"] as ArrayList<String>
         if (!character.comics.items.isNullOrEmpty()) {
             val comicinfo = character.comics.items.joinToString("\n") { it.name }
-            val comicData = listData["Comics"] as ArrayList<String>
             comicData.add(comicinfo)
-            /* val comics = rootView.comics
-               comics.text = comicinfo*/
-        }
+        } else comicData.add("No comics found")
+
+        val storiesData = data["Stories"] as ArrayList<String>
         if (!character.stories.items.isNullOrEmpty()) {
             val storiesinfo = character.stories.items.joinToString("\n") { it.name }
-            val storiesData = listData["Stories"] as ArrayList<String>
             storiesData.add(storiesinfo)
-            /* val stories = rootView.stories
-             stories.text = storiesinfo*/
-        }
+        } else storiesData.add("No stories found")
+
+        val eventData = data["Events"] as ArrayList<String>
         if (!character.events.items.isNullOrEmpty()) {
             val eventinfo = character.events.items.joinToString("\n") { it.name }
-            val eventData = listData["Events"] as ArrayList<String>
             eventData.add(eventinfo)
-            /*val events = rootView.events
-            events.text = eventinfo*/
-        }
+        } else eventData.add("No events found")
+
+        val seriesData = data["Series"] as ArrayList<String>
         if (!character.series.items.isNullOrEmpty()) {
             val seriesinfo = character.series.items.joinToString("\n") { it.name }
-            val seriesData = listData["Series"] as ArrayList<String>
             seriesData.add(seriesinfo)
-            /* val series = rootView.series
-             series.text = seriesinfo*/
-        }
+        } else seriesData.add("No series found")
+
+
         return rootView
     }
 

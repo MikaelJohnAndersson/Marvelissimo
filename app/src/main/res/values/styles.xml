@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorVillain</item>
         <item name="colorPrimaryDark">@color/colorVillainDark</item>
         <item name="colorAccent">@color/colorPower</item>
+        <item name="android:navigationBarColor">@color/darkOcean</item>
 
     </style>
 
