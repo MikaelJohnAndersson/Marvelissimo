@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:baselineAligned="false"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/colorAttackLight"
+        android:padding="3dp">
 
         <ImageView
             android:id="@+id/thumbnail"
@@ -30,7 +32,7 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@color/colorDarker"
+            android:background="@color/colorDarkest"
             android:textAllCaps="true"
             android:textColor="@color/colorLightest"
             android:textSize="@dimen/list_item_title"
