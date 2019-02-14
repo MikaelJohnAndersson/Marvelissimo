@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <!-- Hero colors -->
+    <color name="colorHeroLightest">#6992D1</color>
+    <color name="colorHeroLight">#2E5DA3</color>
+    <color name="colorHero">#1A287A</color>
+    <color name="colorHeroDark">#121A50</color>
     <color name="darkOcean">#000029</color>
+
+
+    <!-- Villain colors -->
+    <color name="colorVillainLightest">#B54743</color>
+    <color name="colorVillainLight">#982929</color>
+    <color name="colorVillain">#6B1B1B</color>
+    <color name="colorVillainDark">#440808</color>
+
+    <!-- Accent colors -->
+    <color name="colorPowerLightest">#FFE186</color>
+    <color name="colorPowerLight">#FDCE41</color>
+    <color name="colorPower">#C7A232</color>
+    <color name="colorPowerDark">#A38322</color>
+
+    <color name="colorAttackLightest">#3D854E</color>
+    <color name="colorAttackLight">#1E632E</color>
+    <color name="colorAttack">#0B4017</color>
+    <color name="colorAttackDark">#122D18</color>
+
+    <color name="colorFightLightest">#D48744</color>
+    <color name="colorFightLight">#CB6710</color>
+    <color name="colorFight">#944910</color>
+    <color name="colorFightDark">#733907</color>
+
+    <!-- Light to dark colors -->
+    <color name="colorLightest">#EEEEEE</color>
+    <color name="colorLighter">#D2D2D2</color>
+    <color name="colorLight">#B1B8BD</color>
+    <color name="colorDark">#868F95</color>
+    <color name="colorDarker">#484A59</color>
+    <color name="colorDarkest">#1D1D1F</color>
+
 </resources>
