@@ -1,7 +1,6 @@
 package com.ecutbildning.marvelissimo.adapters
 
 import android.arch.paging.PagedListAdapter
-import android.content.Context
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -45,7 +44,7 @@ class CharacterRecycleViewAdapter(private val itemClickListener: (Character) -> 
         fun bind(character: Character, clickListener: (Character) -> Unit) {
             itemView.list_item_title.text = character.name
             Picasso.get()
-                .load(character.thumbnail.getUrl(Thumbnail.PORTRAIT_MEDIUM))
+                .load(character.thumbnail.getUrl(Thumbnail.STANDARD_MEDIUM))
                 .fit()
                 .into(itemView.thumbnail)
             itemView.setOnClickListener { clickListener(character)}

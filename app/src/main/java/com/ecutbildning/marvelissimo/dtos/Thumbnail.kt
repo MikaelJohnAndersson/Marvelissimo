@@ -12,7 +12,7 @@ data class Thumbnail(
         return "$path/$size.$extension"
     }
     companion object {
-        const val PORTRAIT_MEDIUM = "portrait_medium"
+        const val STANDARD_MEDIUM = "standard_medium"
         const val LANDSCAPE_MEDIUM = "landscape_medium"
     }
 }
