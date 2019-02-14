@@ -5,6 +5,8 @@
     <dimen name="thumbnail_width">100dp</dimen>
     <dimen name="info_img_width">200dp</dimen>
     <dimen name="info_img_height">200dp</dimen>
+    <dimen name="user_avatar_width">108dp</dimen>
+    <dimen name="user_avatar_height">108dp</dimen>
     <!--padding/margin-->
     <dimen name="thumbnail_padding">5dp</dimen>
     <dimen name="text_view_padding">5dp</dimen>
