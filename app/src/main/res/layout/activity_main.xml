@@ -30,7 +30,7 @@
                 android:layout_gravity="start"
                 android:fitsSystemWindows="true"
                 app:headerLayout="@layout/nav_header_navigation_drawer"
-                app:menu="@menu/activity_navigation_drawer_drawer"/>
+                app:menu="@menu/activity_main_navigation_drawer"/>
 
     </android.support.v4.widget.DrawerLayout>
 
@@ -52,7 +52,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/main_icon"
                 android:src="@drawable/marvel_logo_300x300"
-                android:contentDescription="@string/app_logo"
+                android:contentDescription="@string/app_logo_desc"
                 android:adjustViewBounds="true"/>
         <TextView
                 android:id="@+id/message"
