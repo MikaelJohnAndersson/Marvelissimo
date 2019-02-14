@@ -15,63 +15,43 @@ import android.support.v7.widget.SearchView
 import android.support.v4.app.Fragment
 import com.ecutbildning.marvelissimo.R
 import android.util.Log
-import android.view.MenuItem
 import android.widget.TextView
 import com.ecutbildning.marvelissimo.dtos.User
 import com.ecutbildning.marvelissimo.fragments.ISearchFragment
 import com.ecutbildning.marvelissimo.services.FireBase
 
-
-
-
-
-
-
-
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(top_toolbar)
-        top_toolbar.bringToFront()
-
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        navigation.setOnNavigationItemSelectedListener(onBottomNavigationItemSelectedListener)
+        nav_view.setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
 
         if(savedInstanceState == null) {
-
             supportFragmentManager.beginTransaction()
                 .add(R.id.container, CharacterSearchFragment.newInstance())
                 .commit()
         }
-
-    }
-
-    override fun onStop() {
-        FireBase.signOut()
-        super.onStop()
     }
 
     override fun onCreateOptionsMenu(menu:Menu):Boolean {
         menuInflater.inflate(R.menu.top_navigation, menu)
-        menuInflater.inflate(R.menu.navigation_drawer, menu)
 
         val currentUser = FireBase.currentUser
-        val userEmail: TextView = findViewById(R.id.userEmail)
-        userEmail.text = currentUser?.email
-        val userName: TextView = findViewById(R.id.userName)
-        userName.text = "${currentUser?.firstName} ${currentUser?.lastName}"
+        findViewById<TextView>(R.id.user_email).text = currentUser?.email
+        findViewById<TextView>(R.id.user_firstname).text = currentUser?.firstName
+        findViewById<TextView>(R.id.user_lastname).text = currentUser?.lastName
 
         FireBase.loadOnlineUsers { documents ->
             for (document in documents) {
                 val user = document.toObject(User::class.java)
                 Log.d("MAIN_ACTIVITY", user.firstName + " " + user.lastName)
             }
-
         }
-
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, top_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -80,7 +60,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.bringToFront()
         toggle.syncState()
 
-        nav_view.setNavigationItemSelectedListener(this)
         val searchItem = menu.findItem(R.id.navigation_search)
         val searchView = searchItem.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
@@ -103,7 +82,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return null
     }
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    private val onBottomNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
         when (item.itemId) {
             R.id.navigation_characters -> {
@@ -131,59 +110,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         false
     }
 
+    private val onDrawerNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
 
-   /*
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }*/
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        when (item.itemId) {
-
+           R.id.users -> {
+               val userGroupsIsVisible = nav_view.menu.findItem(R.id.nav_online).isVisible
+               nav_view.menu.findItem(R.id.nav_online).isVisible = !userGroupsIsVisible
+               nav_view.menu.findItem(R.id.nav_offline).isVisible = !userGroupsIsVisible
+            }
             R.id.logout -> {
-            FireBase.signOut()
+                FireBase.signOut()
                 val intent = Intent(this, LogInActivity::class.java)
                 startActivity(intent)
             }
+            else -> drawer_layout.closeDrawer(GravityCompat.START)
         }
-        val nv = findViewById(R.id.nav_view) as NavigationView
-        val m = nv.menu
-        val id = item.itemId
+        return@OnNavigationItemSelectedListener true
+    }
 
-        if (id === R.id.nav_friends) {
-            val b = !m.findItem(R.id.nav_online).isVisible()
-            m.findItem(R.id.nav_online).setVisible(b)
-            m.findItem(R.id.nav_offline).setVisible(b)
-            return true
-        }  else if (id == R.id.nav_favourites) {
-            val b =!m.findItem(R.id.nav_show_fav).isVisible()
-            m.findItem(R.id.nav_show_fav).setVisible(b)
-            m.findItem(R.id.nav_manage_fav).setVisible(b)
-            return true
-        } else if (id === R.id.nav_logout) {
-
-            m.findItem(R.id.logout).setVisible(false)
-
-        } else if (id === R.id.logout) {
-            FireBase.signOut()
-        }
-
-        drawer_layout.closeDrawer(GravityCompat.START)
-        return true
+    override fun onStop() {
+        FireBase.signOut()
+        super.onStop()
     }
 }
