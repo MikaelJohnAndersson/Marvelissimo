@@ -57,13 +57,6 @@ object FireBase {
             }
     }
 
-    fun loadOnlineUsers(onSuccessListener : (QuerySnapshot) -> Unit){
-        FirebaseFirestore.getInstance().collection("users")
-            .whereEqualTo("loggedIn", true)
-            .get()
-            .addOnSuccessListener(onSuccessListener)
-    }
-
     private fun writeNewUser(firstName: String, lastName: String, email: String) {
         val newUser = User(email, firstName, lastName, true)
         val database = FirebaseFirestore.getInstance()
@@ -72,13 +65,6 @@ object FireBase {
             database.collection("users").document(currentUserUid).set(newUser)
     }
 
-    fun addFavorite(itemId: String) {
-        //TODO: Implement
-    }
-
-    fun deleteFavorite(itemId: String) {
-        //TODO: Implement
-    }
     fun signOut () {
         currentUser?.loggedIn=false
         auth.signOut()
