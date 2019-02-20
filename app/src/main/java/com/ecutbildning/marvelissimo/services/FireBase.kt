@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.view.View
+import com.ecutbildning.marvelissimo.activities.LogInActivity
 import com.ecutbildning.marvelissimo.activities.MainActivity
 import com.ecutbildning.marvelissimo.dtos.User
 import com.ecutbildning.marvelissimo.utilities.SnackBarManager
@@ -49,7 +50,7 @@ object FireBase {
             .addOnCompleteListener { task: Task<AuthResult> ->
                 if (task.isSuccessful) {
                     writeNewUser(firstName, lastName, email)
-                    val intent = Intent(context, MainActivity::class.java)
+                    val intent = Intent(context, LogInActivity::class.java)
                     context.startActivity(intent)
                 } else {
                     snackBarManager.createSnackbar(view, "Registration failed", Color.RED)
