@@ -9,12 +9,12 @@
 
     <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:srcCompat="@drawable/marvel_logo_300x300"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/marvelissimo_logo"
             android:id="@+id/login_logo" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="30dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="55dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="55dp"
-            android:layout_marginBottom="14dp" app:layout_constraintBottom_toTopOf="@+id/login_email"
-            android:contentDescription="@string/app_logo_desc"/>
+            android:layout_marginBottom="14dp" app:layout_constraintBottom_toTopOf="@+id/register_firstName"
+            android:contentDescription="@string/app_logo_desc" android:padding="@dimen/login_logo_padding"/>
     <EditText
             android:id="@+id/register_firstName"
             android:layout_width="wrap_content"
