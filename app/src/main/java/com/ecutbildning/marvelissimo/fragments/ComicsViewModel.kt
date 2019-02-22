@@ -2,7 +2,6 @@ package com.ecutbildning.marvelissimo.fragments
 
 import android.arch.lifecycle.ViewModel
 import android.arch.paging.PagedList
-import com.ecutbildning.marvelissimo.services.paging.CharactersDataSourceFactory
 import com.ecutbildning.marvelissimo.services.MarvelAPI
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable

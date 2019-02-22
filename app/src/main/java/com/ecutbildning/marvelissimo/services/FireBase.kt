@@ -8,21 +8,17 @@ import com.ecutbildning.marvelissimo.activities.LogInActivity
 import com.ecutbildning.marvelissimo.activities.MainActivity
 import com.ecutbildning.marvelissimo.dtos.User
 import com.ecutbildning.marvelissimo.utilities.SnackBarManager
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
 
 object FireBase {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private var snackBarManager: SnackBarManager = SnackBarManager()
-    var currentUser: User?=null
+    var currentUser: User? = null
 
     fun signIn(email: String, password: String, context: Context, view: View) {
         auth.signInWithEmailAndPassword(email, password)
@@ -70,4 +66,5 @@ object FireBase {
         currentUser?.loggedIn=false
         auth.signOut()
     }
+
 }

@@ -23,7 +23,6 @@ class LogInActivity : AppCompatActivity() {
 
         btnLogIn.setOnClickListener {
             signIn(login_email.text.toString(), login_password.text.toString())
-
         }
         login_register_button.setOnClickListener {
             val intent = Intent(this@LogInActivity, RegisterActivity::class.java)

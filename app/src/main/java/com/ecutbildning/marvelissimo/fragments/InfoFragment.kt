@@ -44,7 +44,6 @@ abstract class InfoFragment : Fragment() {
             expandableListView!!.setAdapter(adapter)
         }
 
-
         return rootView
     }
 

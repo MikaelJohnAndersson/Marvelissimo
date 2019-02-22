@@ -40,7 +40,6 @@ class ComicsDataSource(
         compositeDisposable.add(
             marvelAPI.getComics(requestedPage * requestedLoadSize, search)
                 .subscribe { response ->
-                    Log.d("COMICS_DATA_SRC", "Loading page $requestedPage")
                     initialCallBack?.onResult(response.data.results, null, adjacentPage)
                     callBack?.onResult(response.data.results, adjacentPage)
                 }

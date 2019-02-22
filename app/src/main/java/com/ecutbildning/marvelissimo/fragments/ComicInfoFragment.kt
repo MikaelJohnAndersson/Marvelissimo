@@ -1,16 +1,9 @@
 package com.ecutbildning.marvelissimo.fragments
 
-import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListAdapter
-import android.widget.ExpandableListView
-import com.ecutbildning.marvelissimo.R
-import com.ecutbildning.marvelissimo.adapters.ExpansionPanelAdapter
-
 import com.ecutbildning.marvelissimo.dtos.Comic
 import com.ecutbildning.marvelissimo.dtos.Thumbnail
 import com.squareup.picasso.Picasso

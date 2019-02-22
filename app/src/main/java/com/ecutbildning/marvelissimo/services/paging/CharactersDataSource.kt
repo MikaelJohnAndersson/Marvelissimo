@@ -40,7 +40,6 @@ class CharactersDataSource(
         compositeDisposable.add(
             marvelAPI.getCharacters(requestedPage * requestedLoadSize, search)
                 .subscribe { response ->
-                    Log.d("CHARACTERS_DATA_SRC", "Loading page $requestedPage")
                     initialCallBack?.onResult(response.data.results, null, adjacentPage)
                     callBack?.onResult(response.data.results, adjacentPage)
                 }
