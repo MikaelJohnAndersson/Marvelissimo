@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/users"
+                android:icon="@drawable/user_48"
+                android:title="@string/nav_drawer_item_users_title"/>
+
+        <item
+                android:id="@+id/nav_online"
+                android:title="@string/nav_drawer_item_online_users_title"
+                android:visible="false" />
+        <item
+                android:id="@+id/nav_offline"
+                android:title="@string/nav_drawer_item_offline_users_title"
+                android:visible="false" />
+    </group>
+
+    <item
+            android:id="@+id/nav_logout"
+            android:title="@string/nav_drawer_item_settings_title">
+        <menu>
+            <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/nav_drawer_item_logout_title" />
+        </menu>
+    </item>
+
+</menu>

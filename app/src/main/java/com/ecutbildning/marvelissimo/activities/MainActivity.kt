@@ -1,5 +1,6 @@
 package com.ecutbildning.marvelissimo.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
@@ -7,28 +8,23 @@ import android.view.Menu
 import com.ecutbildning.marvelissimo.fragments.CharacterSearchFragment
 import com.ecutbildning.marvelissimo.fragments.ComicsSearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import android.support.v7.widget.Toolbar
 import android.support.v7.widget.SearchView
 import android.support.v4.app.Fragment
 import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.fragments.ISearchFragment
-
+import com.ecutbildning.marvelissimo.services.FireBase
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val mTopToolbar = findViewById<Toolbar>(R.id.top_toolbar)
-        setSupportActionBar(mTopToolbar)
-
+        setSupportActionBar(top_toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        navigation.setOnNavigationItemSelectedListener(onBottomNavigationItemSelectedListener)
 
         if(savedInstanceState == null) {
-
             supportFragmentManager.beginTransaction()
                 .add(R.id.container, CharacterSearchFragment.newInstance())
                 .commit()
@@ -37,7 +33,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu:Menu):Boolean {
         menuInflater.inflate(R.menu.top_navigation, menu)
-        val searchView = menu.findItem(R.id.navigation_search).actionView as SearchView
+
+        val searchItem = menu.findItem(R.id.navigation_search)
+        val searchView = searchItem.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val currentFragment = getCurrentFragment() as ISearchFragment
@@ -58,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         return null
     }
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    private val onBottomNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
         when (item.itemId) {
             R.id.navigation_characters -> {
@@ -86,12 +84,8 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
-   /* override fun onBackPressed() {
-        if (fragmentManager.backStackEntryCount == 0){
-            super.onBackPressed()
-        }
-        else{
-            fragmentManager.popBackStack()
-        }
-    }*/
+    override fun onStop() {
+        FireBase.signOut()
+        super.onStop()
+    }
 }

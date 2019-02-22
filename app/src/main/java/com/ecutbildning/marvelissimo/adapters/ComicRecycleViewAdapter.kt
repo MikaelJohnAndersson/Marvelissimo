@@ -44,7 +44,7 @@ class ComicRecycleViewAdapter(private val itemClickListener: (Comic) -> Unit) :
         fun bind(comic: Comic, clickListener: (Comic) -> Unit) {
             itemView.list_item_title.text = comic.title
             Picasso.get()
-                .load(comic.thumbnail.getUrl(Thumbnail.PORTRAIT_MEDIUM))
+                .load(comic.thumbnail.getUrl(Thumbnail.STANDARD_MEDIUM))
                 .fit()
                 .into(itemView.thumbnail)
             itemView.setOnClickListener { clickListener(comic)}

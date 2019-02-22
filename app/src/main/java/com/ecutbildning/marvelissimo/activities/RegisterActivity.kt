@@ -8,6 +8,7 @@ import com.ecutbildning.marvelissimo.R
 import com.ecutbildning.marvelissimo.services.FireBase
 import com.ecutbildning.marvelissimo.utilities.SnackBarManager
 import kotlinx.android.synthetic.main.activity_register.*
+import java.util.*
 
 class RegisterActivity : AppCompatActivity(){
 
@@ -32,8 +33,16 @@ class RegisterActivity : AppCompatActivity(){
     private fun createAccount(email: String, password: String, firstName: String, lastName: String) {
         if (email.isNotBlank() && password.isNotBlank() && firstName.isNotBlank() && lastName.isNotBlank()) {
             FireBase.createUser(email, password, firstName, lastName, this, view)
+            Timer().schedule(
+                object : java.util.TimerTask() {
+                    override fun run() {
+                        finish()
+                    }
+                },
+                3000
+            )
         } else {
-            snackbarManager.createSnackbar(view, resources.getString(R.string.fields_missing_registration), Color.RED)
+            snackbarManager.createSnackbar(view, resources.getString(R.string.fields_missing_registration), Color.YELLOW)
         }
     }
 }
